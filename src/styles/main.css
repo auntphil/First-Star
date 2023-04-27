@@ -1,0 +1,87 @@
+body, #root, .App {
+  min-height: 100vh;
+  position: relative;
+}
+
+body .App-header, #root .App-header, .App .App-header {
+  background-color: #282c34;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding: 0px 15px;
+}
+
+body .App-header .title a, #root .App-header .title a, .App .App-header .title a {
+  color: white;
+  text-decoration: none;
+}
+
+body .App-header #userHeader, #root .App-header #userHeader, .App .App-header #userHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body .App-header #userHeader #user, #root .App-header #userHeader #user, .App .App-header #userHeader #user {
+  padding-right: 10px;
+  font-size: 1rem;
+}
+
+body #content, #root #content, .App #content {
+  min-height: calc(100vh - 200px);
+  max-width: 750px;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body #content #wrapper, #root #content #wrapper, .App #content #wrapper {
+  text-align: center;
+  max-width: 50vw;
+  margin: auto;
+}
+
+body footer, #root footer, .App footer {
+  background-color: #CCCCCC;
+  position: absolute;
+  bottom: 0px;
+  width: 100vw;
+  height: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body footer #poem, #root footer #poem, .App footer #poem {
+  font-size: 0.8rem;
+  display: inline-block;
+  width: 230px;
+  max-width: 100%;
+  text-align: center;
+}
+
+body footer #poem #author, #root footer #poem #author, .App footer #poem #author {
+  color: gray;
+  display: block;
+  text-align: right;
+}
+/*# sourceMappingURL=main.css.map */

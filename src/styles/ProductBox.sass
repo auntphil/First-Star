@@ -1,0 +1,25 @@
+.product-box
+    border: 1px solid white
+    border-radius: 15px
+    max-width: 100%
+    width: 600px
+    display: grid
+    grid-template-columns: 1fr 2fr
+    overflow: hidden
+    margin-block: 8px
+    .left-content
+        background-size: cover
+        .image
+            width: 100%
+            opacity: 0
+    .right-content
+        display: grid
+        grid-template-rows: 4fr 1fr
+        .title
+        .price
+            display: flex
+            justify-content: end
+            padding-right: 15px
+            padding-bottom: 15px
+            a
+                color: white
