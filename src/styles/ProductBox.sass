@@ -3,27 +3,47 @@
     max-width: 100%
     width: 600px
     height: 95px
-    display: grid
-    grid-template-columns: 1fr 2fr
     overflow: hidden
     border-bottom: 1px solid black
+    display: grid
+    grid-template-columns: 1fr 2fr
     &:first-child
         border-top: 1px solid black
+    input
+        padding: 0px
+        margin: 0px
+        border: 0px
+        border-bottom: 1px solid gray
     .left-content
         background-size: cover
         height: 95px
         background-position: center
+        position: relative
+        .new-image-url
+            position: absolute
+            bottom: 10px
+            left: 0
+            width: 100%
     .right-content
-        padding: 10px 0px
+        padding: 10px
         height: 75px
-        display: grid
-        grid-template-rows: 4fr 1fr
         position: relative
         .title
             font-weight: bold
+        .new-title-wrapper
+            width: 100%
+            .new-title
+                width: 100%
+                border: 0px
+                border-bottom: 1px solid gray
+                margin-bottom: 5px
+        .new-url-wrapper
+            width: 100%
+            display: grid
+            grid-template-columns: 7fr 3fr
         .price
             display: flex
-            justify-content: end
+            justify-content: flex-end
             padding-right: 15px
             padding-bottom: 15px
             a
@@ -34,9 +54,8 @@
             column-gap: 10px
             grid-template-columns: 1fr 1fr 1fr
             bottom: 10px
-            width: 100%
+            width: calc(100% - 20px)
             .footer-space
-            .removeBtn
+            .rightBtn
                 display: flex
                 justify-content: right
-                padding-right: 10px

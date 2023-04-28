@@ -1,6 +1,5 @@
 import { deleteDoc, doc } from 'firebase/firestore'
 import { useState } from 'react'
-import '../styles/ProductBox.css'
 import { db } from '../utils/firebase'
 import {LoadingThreeCircles} from '../Screens/Loading'
 
@@ -29,21 +28,21 @@ export const WishBox = ({wish, listId, wishId, wishes, setWishes, user}) => {
         data = wish.data()
     }
     return(
-        <div className='product-box'>
-            <a href={data.url} target="_blank">
+        <div className='product-box item'>
+            <a href={data.url} target="_blank" rel="noreferrer">
                 <div className="left-content"
                     style={{backgroundImage: `url(${data.image})`}}
                 >
             </div>
             </a>
             <div className='right-content'>
-                <a href={data.url} target="_blank" className='boringLink'>
+                <a href={data.url} target="_blank" rel="noreferrer" className='boringLink'>
                     <span className='title'>{data.title}</span>
                 </a>
                 <span className='footer'>
                     <span className='footer-space'>Store Logo</span>
                     <span className='footer-space'></span>
-                    <span className='footer-space removeBtn'>
+                    <span className='footer-space rightBtn'>
                         {
                             loading ?
                                 <LoadingThreeCircles s={'22'} p={'0px'} />
