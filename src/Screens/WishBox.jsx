@@ -2,6 +2,8 @@ import { deleteDoc, doc } from 'firebase/firestore'
 import { useState } from 'react'
 import { db } from '../utils/firebase'
 import {LoadingThreeCircles} from '../Screens/Loading'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export const WishBox = ({wish, listId, wishId, wishes, setWishes, user}) => {
     let data = {}
@@ -41,20 +43,21 @@ export const WishBox = ({wish, listId, wishId, wishes, setWishes, user}) => {
                 </a>
                 <span className='footer'>
                     <span className='footer-space'>Store Logo</span>
+                    <span className='footer-space'>Priority</span>
                     <span className='footer-space'></span>
-                    <span className='footer-space rightBtn'>
-                        {
-                            loading ?
-                                <LoadingThreeCircles s={'22'} p={'0px'} />
-                            :
-                                user ?
-                                    <button onClick={removeWish}>Remove Wish</button>
-                                :
-                                ''
-                        }
-                    </span>
                 </span>
             </div>
+            <span className='remove-wish-wrapper'>
+                {
+                    loading ?
+                        <LoadingThreeCircles s={'22'} p={'0px'} />
+                    :
+                        user ?
+                            <div className="remove-wish-btn" onClick={removeWish}><FontAwesomeIcon icon={faTrash} style={{color: '#b12525' }} /><span className="remove-wish-text">Trash</span></div>
+                        :
+                        ''
+                }
+            </span>
         </div>
     )
 }

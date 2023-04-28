@@ -1,5 +1,5 @@
 .product-box
-    border: 1px solid white
+    position: relative
     max-width: 100%
     width: 600px
     height: 95px
@@ -7,6 +7,27 @@
     border-bottom: 1px solid black
     display: grid
     grid-template-columns: 1fr 2fr
+    .remove-wish-wrapper
+        position: absolute
+        padding: 5px
+        bottom: 5px
+        right: 5px
+        cursor: pointer
+        .remove-wish-btn
+            display: flex
+            justify-content: center
+            align-items: center
+            .remove-wish-text
+                display: inline-block
+                width: 0px
+                overflow: hidden
+                white-space: nowrap
+                transition: all 0.5s ease-in-out
+                margin-left: 3px
+        &:hover
+            .remove-wish-text
+                width: 56px
+            
     &:first-child
         border-top: 1px solid black
     input

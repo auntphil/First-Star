@@ -1,5 +1,5 @@
 .product-box {
-  border: 1px solid white;
+  position: relative;
   max-width: 100%;
   width: 600px;
   height: 95px;
@@ -9,6 +9,40 @@
   display: grid;
   -ms-grid-columns: 1fr 2fr;
       grid-template-columns: 1fr 2fr;
+}
+
+.product-box .remove-wish-wrapper {
+  position: absolute;
+  padding: 5px;
+  bottom: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.product-box .remove-wish-wrapper .remove-wish-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.product-box .remove-wish-wrapper .remove-wish-btn .remove-wish-text {
+  display: inline-block;
+  width: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  margin-left: 3px;
+}
+
+.product-box .remove-wish-wrapper:hover .remove-wish-text {
+  width: 56px;
 }
 
 .product-box:first-child {

@@ -4,6 +4,8 @@ import { db } from "../../utils/firebase"
 import { LoadingMagnifyingGlass, LoadingThreeCircles } from "../Loading"
 import {WishBox} from '../WishBox'
 import '../../styles/ProductBox.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
 
 const ViewOne = ({user}) => {
     const listId = new URLSearchParams(window.location.search).get('id')
@@ -107,11 +109,6 @@ const ViewOne = ({user}) => {
     return(
         <div id="wrapper">
             <h2>{list.data().name}</h2>
-            { error?
-                <h5>{errorMsg}</h5>
-                :
-                <></>
-            }
             <div id="product-wrapper">
                 { wishes.length === 0 ?
                     <div>No Wishes</div>
@@ -126,14 +123,14 @@ const ViewOne = ({user}) => {
                                 :
                                 ''
                             }
-                            <input type="text" placeholder='Wish Image' value={wImageURL} onChange={(e) => setwImageURL(e.target.value)} className="new-image-url" />
+                            <input type="text" placeholder='New Wish Image' value={wImageURL} onChange={(e) => setwImageURL(e.target.value)} className="new-image-url" />
                         </div>
                         <div className="right-content">
                             <div className="new-title-wrapper">
-                                <input type="text" placeholder='Wish Title' className='title new-title' value={wTitle} onChange={(e) => {setWTitle(e.target.value)}} />
+                                <input type="text" placeholder='New Wish Title' className='title new-title' value={wTitle} onChange={(e) => {setWTitle(e.target.value)}} />
                             </div>
                             <div className="new-url-wrapper">
-                                <input type="text" placeholder='Wish URL' value={wURL} onChange={(e) => setWURL(e.target.value)} /><button onClick={fetchWish}>Fetch Wish</button>
+                                <input type="text" placeholder='New Wish URL' value={wURL} onChange={(e) => setWURL(e.target.value)} /><button onClick={fetchWish}>Fetch Wish</button>
                             </div>
                             <div className='footer'>
                                 <span>{ error ? errorMsg : ''}</span>
@@ -149,7 +146,7 @@ const ViewOne = ({user}) => {
             { showNewWish ?
                 <button onClick={handleCancelWish}>Cancel Wish</button>
                 :
-                <button onClick={() => {setShowNewWish(true)}}>Add Wish</button>
+                <div onClick={() => {setShowNewWish(true)}} id="add-wish-btn"><FontAwesomeIcon icon={faPlus} style={{color: '#FFFFFF', fontSize: '2rem'}}/></div>
             }
         </div>
     )

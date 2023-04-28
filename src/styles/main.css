@@ -99,4 +99,27 @@ body footer #poem #author, #root footer #poem #author, .App footer #poem #author
   display: block;
   text-align: right;
 }
+
+body #add-wish-btn, #root #add-wish-btn, .App #add-wish-btn {
+  cursor: pointer;
+  position: absolute;
+  bottom: 165px;
+  right: 15px;
+  z-index: 98;
+  background-color: #089708;
+  height: 55px;
+  width: 55px;
+  border-radius: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-filter: drop-shadow(0 0 0.75rem #089708);
+          filter: drop-shadow(0 0 0.75rem #089708);
+}
 /*# sourceMappingURL=main.css.map */
