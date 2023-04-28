@@ -41,6 +41,7 @@ body .App-header #userHeader #user, #root .App-header #userHeader #user, .App .A
 
 body #content, #root #content, .App #content {
   min-height: calc(100vh - 200px);
+  padding-bottom: 175px;
   max-width: 750px;
   margin: auto;
   display: -webkit-box;
