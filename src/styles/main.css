@@ -3,9 +3,26 @@ body, #root, .App {
   position: relative;
 }
 
+body .boringLink, #root .boringLink, .App .boringLink {
+  text-decoration: none;
+  text-underline: none;
+  color: black;
+}
+
+body .boringLink.white, #root .boringLink.white, .App .boringLink.white {
+  color: white !important;
+}
+
+body .boringLink:hover, #root .boringLink:hover, .App .boringLink:hover {
+  text-decoration: underline;
+}
+
 body .App-header, #root .App-header, .App .App-header {
-  background-color: #282c34;
+  position: fixed;
+  top: 0px;
+  width: calc(100vw - 30px);
   height: 50px;
+  background-color: #282c34c9;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -18,11 +35,7 @@ body .App-header, #root .App-header, .App .App-header {
   font-size: calc(10px + 2vmin);
   color: white;
   padding: 0px 15px;
-}
-
-body .App-header .title a, #root .App-header .title a, .App .App-header .title a {
-  color: white;
-  text-decoration: none;
+  z-index: 99;
 }
 
 body .App-header #userHeader, #root .App-header #userHeader, .App .App-header #userHeader {
@@ -40,8 +53,9 @@ body .App-header #userHeader #user, #root .App-header #userHeader #user, .App .A
 }
 
 body #content, #root #content, .App #content {
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 250px);
   padding-bottom: 175px;
+  padding-top: 75px;
   max-width: 750px;
   margin: auto;
   display: -webkit-box;

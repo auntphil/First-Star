@@ -2,6 +2,7 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { db } from "../../utils/firebase";
+import { LoadingThreeCircles } from "../Loading";
 
 const ViewAll = ( props ) => {
     const { user } = props
@@ -47,7 +48,7 @@ const ViewAll = ( props ) => {
             <h2>Wish Lists</h2>
             {
                 loading ? 
-                    <div>loading...</div>
+                    <LoadingThreeCircles />
                 :
                     <ul>{lists.map( list => (
                         <Link key={list.id} to={`/list?id=${list.id}`}>

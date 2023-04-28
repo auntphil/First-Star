@@ -1,21 +1,26 @@
 .product-box
     border: 1px solid white
-    border-radius: 15px
     max-width: 100%
     width: 600px
+    height: 95px
     display: grid
     grid-template-columns: 1fr 2fr
     overflow: hidden
-    margin-block: 8px
+    border-bottom: 1px solid black
+    &:first-child
+        border-top: 1px solid black
     .left-content
         background-size: cover
-        .image
-            width: 100%
-            opacity: 0
+        height: 95px
+        background-position: center
     .right-content
+        padding: 10px 0px
+        height: 75px
         display: grid
         grid-template-rows: 4fr 1fr
+        position: relative
         .title
+            font-weight: bold
         .price
             display: flex
             justify-content: end
@@ -23,3 +28,15 @@
             padding-bottom: 15px
             a
                 color: white
+        .footer
+            position: absolute
+            display: grid
+            column-gap: 10px
+            grid-template-columns: 1fr 1fr 1fr
+            bottom: 10px
+            width: 100%
+            .footer-space
+            .removeBtn
+                display: flex
+                justify-content: right
+                padding-right: 10px

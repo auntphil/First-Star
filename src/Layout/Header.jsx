@@ -6,7 +6,7 @@ const Header = (props) => {
     return(
     <header className="App-header">
         <div className='title'>
-            <a href='/'>
+            <a href='/' className="boringLink white">
                 First Star
             </a>
         </div>

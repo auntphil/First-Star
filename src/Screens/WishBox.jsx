@@ -1,6 +1,28 @@
+import { deleteDoc, doc } from 'firebase/firestore'
+import { useState } from 'react'
 import '../styles/ProductBox.css'
-export const WishBox = ({wish}) => {
+import { db } from '../utils/firebase'
+import {LoadingThreeCircles} from '../Screens/Loading'
+
+export const WishBox = ({wish, listId, wishId, wishes, setWishes, user}) => {
     let data = {}
+
+    let [loading, setLoading] = useState(false)
+
+    const removeWish = async () => {
+        setLoading(true)
+        try{
+            //Remove from FireStore
+            const wishRef = doc(db, `lists/${listId}/wishes`, wishId)
+            await deleteDoc(wishRef)
+
+            //Remove from State
+            setWishes(wishes.filter( w => w.id !== wishId))
+        }catch(err){
+            console.error(err)
+        }
+    }
+
     if(wish.title){
         data = wish
     }else{
@@ -8,20 +30,30 @@ export const WishBox = ({wish}) => {
     }
     return(
         <div className='product-box'>
-            <div className="left-content"
-                style={{backgroundImage: `url(${data.image})`}}
-            >
-
-                <a href={data.url} target="_blank">
-                    <img className="image" src={data.image} />
-                </a>
+            <a href={data.url} target="_blank">
+                <div className="left-content"
+                    style={{backgroundImage: `url(${data.image})`}}
+                >
             </div>
+            </a>
             <div className='right-content'>
-                <span className='title'>{data.title}</span>
-                <span className='price'>
-                    <a href={data.url} target="_blank">
-                        {data.price}
-                    </a>
+                <a href={data.url} target="_blank" className='boringLink'>
+                    <span className='title'>{data.title}</span>
+                </a>
+                <span className='footer'>
+                    <span className='footer-space'>Store Logo</span>
+                    <span className='footer-space'></span>
+                    <span className='footer-space removeBtn'>
+                        {
+                            loading ?
+                                <LoadingThreeCircles s={'22'} p={'0px'} />
+                            :
+                                user ?
+                                    <button onClick={removeWish}>Remove Wish</button>
+                                :
+                                ''
+                        }
+                    </span>
                 </span>
             </div>
         </div>

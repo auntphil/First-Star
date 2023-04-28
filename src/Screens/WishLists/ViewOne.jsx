@@ -1,18 +1,20 @@
 import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { db } from "../../utils/firebase"
+import { LoadingMagnifyingGlass, LoadingThreeCircles } from "../Loading"
 import {WishBox} from '../WishBox'
 
-const ViewOne = () => {
-    const id = new URLSearchParams(window.location.search).get('id')
+const ViewOne = ({user}) => {
+    const listId = new URLSearchParams(window.location.search).get('id')
     const apiUrl = process.env.REACT_APP_API_URL
 
-    const docRef = doc(db,"lists",id)
+    const docRef = doc(db,"lists",listId)
     const colRef = collection(docRef, "wishes")
 
     const [list, setList] = useState({})
     const [wishes, setWishes] = useState({})
     const [loading, setLoading] = useState(true)
+    const [loadingNewItem, setLoadingNewItem] = useState(false)
     const [itemURL, setItemURL] = useState("")
     const [error, setError] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
@@ -45,7 +47,7 @@ const ViewOne = () => {
     }
 
     const handleSubmit = (e) => {
-        setLoading(true)
+        setLoadingNewItem(true)
         e.preventDefault()  //Prevent Default Form Submission
     
         if( itemURL === "" ) return   
@@ -63,7 +65,7 @@ const ViewOne = () => {
                 const newWish = await saveProduct(data)
                 wishes.push(newWish)
                 setWishes(wishes)
-                setLoading(false)
+                setLoadingNewItem(false)
                 setItemURL("")
               })
             })
@@ -71,11 +73,11 @@ const ViewOne = () => {
               console.error(err)
               setError(true)
               setErrorMsg("Error Retrieving Data")
-              setLoading(false)
+              setLoadingNewItem(false)
           })
       }
 
-    if(loading)return <div>Loading...</div>
+    if(loading)return <LoadingThreeCircles />
 
     return(
         <div id="wrapper">
@@ -86,7 +88,8 @@ const ViewOne = () => {
                 <></>
             }
             <div id="product-wrapper">
-                {wishes.map( wish => <WishBox wish={wish} key={wish.id} />)}
+                {wishes.map( wish => <WishBox wish={wish} key={wish.id} listId={listId} wishes={wishes} setWishes={setWishes} wishId={wish.id} user={user} />)}
+                { loadingNewItem ? <div className="product-box-loading"><LoadingMagnifyingGlass s={'70px'} /></div> : '' }
             </div>
             <form onSubmit={handleSubmit}>
                 <input type="text" value={itemURL} placeholder="Item URL" onChange={(e) => {setItemURL(e.target.value)}} />
