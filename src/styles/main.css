@@ -1,3 +1,10 @@
+input {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  border-bottom: 1px solid gray;
+}
+
 body, #root, .App {
   min-height: 100vh;
   position: relative;
@@ -61,12 +68,57 @@ body #content, #root #content, .App #content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
 }
 
 body #content #wrapper, #root #content #wrapper, .App #content #wrapper {
   text-align: center;
   max-width: 50vw;
   margin: auto;
+}
+
+body #content #wrapper .floating-btn, #root #content #wrapper .floating-btn, .App #content #wrapper .floating-btn {
+  cursor: pointer;
+  position: absolute;
+  bottom: 165px;
+  z-index: 98;
+  border-radius: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body #content #wrapper #new-wish-btn, #root #content #wrapper #new-wish-btn, .App #content #wrapper #new-wish-btn {
+  right: 15px;
+  background-color: #089708;
+  height: 55px;
+  width: 55px;
+  -webkit-filter: drop-shadow(0 0 0.75rem #089708);
+          filter: drop-shadow(0 0 0.75rem #089708);
+}
+
+body #content #wrapper #edit-list-btn, #root #content #wrapper #edit-list-btn, .App #content #wrapper #edit-list-btn {
+  right: 75px;
+  background-color: #d1881a;
+  height: 25px;
+  width: 25px;
+  -webkit-filter: drop-shadow(0 0 0.75rem #d1881a);
+          filter: drop-shadow(0 0 0.75rem #d1881a);
+}
+
+body #content #wrapper #close-list-btn, #root #content #wrapper #close-list-btn, .App #content #wrapper #close-list-btn {
+  right: 75px;
+  background-color: #b12525;
+  height: 25px;
+  width: 25px;
+  -webkit-filter: drop-shadow(0 0 0.75rem #b12525);
+          filter: drop-shadow(0 0 0.75rem #b12525);
 }
 
 body footer, #root footer, .App footer {
@@ -98,28 +150,5 @@ body footer #poem #author, #root footer #poem #author, .App footer #poem #author
   color: gray;
   display: block;
   text-align: right;
-}
-
-body #add-wish-btn, #root #add-wish-btn, .App #add-wish-btn {
-  cursor: pointer;
-  position: absolute;
-  bottom: 165px;
-  right: 15px;
-  z-index: 98;
-  background-color: #089708;
-  height: 55px;
-  width: 55px;
-  border-radius: 150px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-filter: drop-shadow(0 0 0.75rem #089708);
-          filter: drop-shadow(0 0 0.75rem #089708);
 }
 /*# sourceMappingURL=main.css.map */

@@ -1,11 +1,11 @@
-import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { db } from "../../utils/firebase"
 import { LoadingMagnifyingGlass, LoadingThreeCircles } from "../Loading"
 import {WishBox} from '../WishBox'
 import '../../styles/ProductBox.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faPencil, faPlus, faSave, faX } from "@fortawesome/free-solid-svg-icons"
 
 const ViewOne = ({user}) => {
     const listId = new URLSearchParams(window.location.search).get('id')
@@ -19,6 +19,10 @@ const ViewOne = ({user}) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
+
+    //Edit Wish List
+    const [listEdit, setListEdit] = useState(false)
+    const [listTitle, setListTitle] = useState('')
     
     //New Wish
     const [showNewWish, setShowNewWish] = useState(false)
@@ -37,6 +41,8 @@ const ViewOne = ({user}) => {
             col.forEach( wish => {
                 wishArray.push(wish)
             })
+
+            setListTitle(doc.data().name)
                         
             setList(doc)
             setWishes(wishArray)
@@ -44,7 +50,12 @@ const ViewOne = ({user}) => {
         }
 
         getList()
-    },[docRef])
+    },[])
+
+    const updateListTitle = async () => {
+        await updateDoc(docRef,{name: listTitle})
+        setListEdit(false)
+    }
 
     const saveWish = async () => {
         const data ={
@@ -108,12 +119,17 @@ const ViewOne = ({user}) => {
 
     return(
         <div id="wrapper">
-            <h2>{list.data().name}</h2>
+            {
+                listEdit ?
+                    <h2><input type="text" value={listTitle} onChange={(e) => setListTitle(e.target.value)} /></h2>
+                :
+                    <h2>{listTitle}</h2>
+            }
             <div id="product-wrapper">
                 { wishes.length === 0 ?
                     <div>No Wishes</div>
                     :
-                    wishes.map( wish => <WishBox wish={wish} key={wish.id} listId={listId} wishes={wishes} setWishes={setWishes} wishId={wish.id} user={user} />)
+                    wishes.map( wish => <WishBox wish={wish} key={wish.id} listId={listId} wishes={wishes} setWishes={setWishes} wishId={wish.id} user={user} listEdit={listEdit} />)
                 }
                 { showNewWish ?
                     <div className="product-box new-wish">
@@ -141,13 +157,40 @@ const ViewOne = ({user}) => {
                     </div>
                 :
                 ''
-            }
+                }
             </div>
-            { showNewWish ?
-                <button onClick={handleCancelWish}>Cancel Wish</button>
-                :
-                <div onClick={() => {setShowNewWish(true)}} id="add-wish-btn"><FontAwesomeIcon icon={faPlus} style={{color: '#FFFFFF', fontSize: '2rem'}}/></div>
-            }
+
+            <div id="wish-floating-btn">
+                {
+                    !listEdit && !showNewWish ?
+                        <>
+                            <div onClick={() => {setShowNewWish(true)}} className="floating-btn" id="new-wish-btn"><FontAwesomeIcon icon={faPlus} style={{color: '#FFFFFF', fontSize: '2rem'}}/></div>
+                            <div onClick={() => {setListEdit(true)}}className="floating-btn" id="edit-list-btn"><FontAwesomeIcon icon={faPencil} style={{color: '#FFFFFF', fontSize: '0.75rem'}}/></div>
+                        </>
+                    :
+                        <>
+                            {
+                                listEdit ?
+                                    <>
+                                        <div onClick={updateListTitle} className="floating-btn" id="new-wish-btn"><FontAwesomeIcon icon={faSave} style={{color: '#FFFFFF', fontSize: '2rem'}}/></div>
+                                        <div onClick={() => {setListEdit(false)}}className="floating-btn" id="close-list-btn"><FontAwesomeIcon icon={faX} style={{color: '#FFFFFF', fontSize: '0.75rem'}}/></div>
+                                    </>
+                                :
+                                    <>
+                                        {
+                                            showNewWish ?
+                                                <>
+                                                    <div onClick={saveWish} className="floating-btn" id="new-wish-btn"><FontAwesomeIcon icon={faSave} style={{color: '#FFFFFF', fontSize: '2rem'}}/></div>
+                                                    <div onClick={handleCancelWish}className="floating-btn" id="close-list-btn"><FontAwesomeIcon icon={faX} style={{color: '#FFFFFF', fontSize: '0.75rem'}}/></div>
+                                                </>
+                                            :
+                                                ''
+                                        }
+                                    </>
+                            }
+                        </>
+                }
+            </div>
         </div>
     )
 }

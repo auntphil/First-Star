@@ -5,7 +5,7 @@ import {LoadingThreeCircles} from '../Screens/Loading'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-export const WishBox = ({wish, listId, wishId, wishes, setWishes, user}) => {
+export const WishBox = ({wish, listId, wishId, wishes, setWishes, user, listEdit}) => {
     let data = {}
 
     let [loading, setLoading] = useState(false)
@@ -52,7 +52,7 @@ export const WishBox = ({wish, listId, wishId, wishes, setWishes, user}) => {
                     loading ?
                         <LoadingThreeCircles s={'22'} p={'0px'} />
                     :
-                        user ?
+                        user && listEdit ?
                             <div className="remove-wish-btn" onClick={removeWish}><FontAwesomeIcon icon={faTrash} style={{color: '#b12525' }} /><span className="remove-wish-text">Trash</span></div>
                         :
                         ''
