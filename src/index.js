@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './Layout/Layout';
@@ -10,6 +9,9 @@ import ViewOne from './Screens/WishLists/ViewOne';
 import CreateAccount from './Screens/Account/CreateAccount';
 import { getCurrentUser } from './utils/appwrite';
 import { SignIn } from './Screens/Account/SignIn';
+
+import './index.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 export default function App(){
   const[user, setUser] = useState(null)
@@ -32,7 +34,7 @@ export default function App(){
         <Route path="/" element={<Layout user={user} setUser={setUser} />}>
           <Route index element={<Home user={user}/>}  />
           <Route path="signin" element={<SignIn setUser={setUser} />} />
-          <Route path="new-user" element={<CreateAccount user={user} />} />
+          <Route path="register" element={<CreateAccount user={user} />} />
           <Route path="lists" element={<ViewAll user={user} />} />
           <Route path="list" element={<ViewOne user={user} />} />
         </Route>

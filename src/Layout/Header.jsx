@@ -25,7 +25,18 @@ const Header = (props) => {
         </div>
         <div id="userHeader">
         <span id="user">{user?user.name:''}</span>
-            {user ? <button onClick={handleLogout}>Logout</button> : <Link to="/signin" >Sign In</Link>}
+            {user ? 
+                <button onClick={handleLogout} className="btn btn-outline-light">Logout</button>
+            :
+                <div id="header-btn-wrapper">
+                    <Link to="/register" id="signin-btn-wrapper" className="btn btn-light">
+                        Register
+                    </Link>
+                    <Link to="/signin" id="signin-btn-wrapper" className="btn btn-outline-info">
+                        SignIn
+                    </Link>
+                </div>
+            }
         </div>
     </header>
     )

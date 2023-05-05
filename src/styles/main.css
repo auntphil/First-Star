@@ -27,7 +27,7 @@ body .boringLink:hover, #root .boringLink:hover, .App .boringLink:hover {
 body .App-header, #root .App-header, .App .App-header {
   position: fixed;
   top: 0px;
-  width: calc(100vw - 30px);
+  width: 100%;
   height: 50px;
   background-color: #282c34c9;
   display: -webkit-box;
@@ -57,6 +57,16 @@ body .App-header #userHeader, #root .App-header #userHeader, .App .App-header #u
 body .App-header #userHeader #user, #root .App-header #userHeader #user, .App .App-header #userHeader #user {
   padding-right: 10px;
   font-size: 1rem;
+}
+
+body .App-header #userHeader #header-btn-wrapper, #root .App-header #userHeader #header-btn-wrapper, .App .App-header #userHeader #header-btn-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body .App-header #userHeader #header-btn-wrapper .btn:first-child, #root .App-header #userHeader #header-btn-wrapper .btn:first-child, .App .App-header #userHeader #header-btn-wrapper .btn:first-child {
+  margin-right: 10px;
 }
 
 body #content, #root #content, .App #content {

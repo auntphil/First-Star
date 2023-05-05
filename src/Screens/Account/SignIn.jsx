@@ -41,7 +41,7 @@ export function SignIn(props){
             {loading ?
                 <LoadingThreeCircles s={17} p={0} />
             :
-                <button onClick={handleSubmit}>Login</button>
+                <button onClick={handleSubmit} >Login</button>
             }
             <br/>
             {error ?
