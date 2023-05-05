@@ -1,13 +1,13 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import '../styles/main.css'
 
 const Layout = (props) => {
-  const { user } = props
+  const { user, setUser } = props
   return (
     <div className="App">
-      <Header user={user} />
+      <Header user={user} setUser={setUser} />
       <div id="content">
         <Outlet />
       </div>

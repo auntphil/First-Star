@@ -1,26 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './Layout/Layout';
 import Home from './Screens/Home';
-import { auth } from './utils/firebase';
 import ViewAll from './Screens/WishLists/ViewAll';
 import ViewOne from './Screens/WishLists/ViewOne';
+import CreateAccount from './Screens/Account/CreateAccount';
+import { getCurrentUser } from './utils/appwrite';
+import { SignIn } from './Screens/Account/SignIn';
 
 export default function App(){
   const[user, setUser] = useState(null)
 
-  auth.onAuthStateChanged( user => {
-    setUser(user)
-  })
+  useEffect( () => {
+    const getAccount = async () => {
+      getCurrentUser()
+      .then( response => setUser(response))
+      .catch( error => {
+        console.log(error)
+        setUser(null)
+      })
+    }
+    getAccount()
+  },[])
 
   return(
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout user={user} />}>
-          <Route index element={<Home user={user} />} />
+        <Route path="/" element={<Layout user={user} setUser={setUser} />}>
+          <Route index element={<Home user={user}/>}  />
+          <Route path="signin" element={<SignIn setUser={setUser} />} />
+          <Route path="new-user" element={<CreateAccount user={user} />} />
           <Route path="lists" element={<ViewAll user={user} />} />
           <Route path="list" element={<ViewOne user={user} />} />
         </Route>
