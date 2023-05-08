@@ -131,6 +131,177 @@ body #content #wrapper #close-list-btn, #root #content #wrapper #close-list-btn,
           filter: drop-shadow(0 0 0.75rem #b12525);
 }
 
+body #content #wrapper .modal-wrapper, #root #content #wrapper .modal-wrapper, .App #content #wrapper .modal-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #ffffffbf;
+  left: 0;
+  top: 0;
+  z-index: 98;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body #content #wrapper .modal-wrapper .modal-inner-wrapper, #root #content #wrapper .modal-wrapper .modal-inner-wrapper, .App #content #wrapper .modal-wrapper .modal-inner-wrapper {
+  overflow: hidden;
+  border: 1px solid black;
+  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 15px;
+}
+
+body #content #wrapper .modal-wrapper .modal-inner-wrapper .title, #root #content #wrapper .modal-wrapper .modal-inner-wrapper .title, .App #content #wrapper .modal-wrapper .modal-inner-wrapper .title {
+  text-align: left;
+}
+
+body #content #wrapper .modal-wrapper .modal-inner-wrapper .modal-buttons, #root #content #wrapper .modal-wrapper .modal-inner-wrapper .modal-buttons, .App #content #wrapper .modal-wrapper .modal-inner-wrapper .modal-buttons {
+  margin-top: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+body #content #wrapper .modal-wrapper .modal-inner-wrapper .modal-buttons button, #root #content #wrapper .modal-wrapper .modal-inner-wrapper .modal-buttons button, .App #content #wrapper .modal-wrapper .modal-inner-wrapper .modal-buttons button {
+  margin-left: 5px;
+}
+
+body #content #wrapper .modal-wrapper .remove-wish-wrapper, #root #content #wrapper .modal-wrapper .remove-wish-wrapper, .App #content #wrapper .modal-wrapper .remove-wish-wrapper {
+  position: absolute;
+  padding: 5px;
+  bottom: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+body #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn, #root #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn, .App #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn .remove-wish-text, #root #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn .remove-wish-text, .App #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn .remove-wish-text {
+  display: inline-block;
+  width: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  margin-left: 3px;
+}
+
+body #content #wrapper .modal-wrapper .remove-wish-wrapper:hover .remove-wish-text, #root #content #wrapper .modal-wrapper .remove-wish-wrapper:hover .remove-wish-text, .App #content #wrapper .modal-wrapper .remove-wish-wrapper:hover .remove-wish-text {
+  width: 56px;
+}
+
+body #content #wrapper .modal-wrapper:first-child, #root #content #wrapper .modal-wrapper:first-child, .App #content #wrapper .modal-wrapper:first-child {
+  border-top: 1px solid black;
+}
+
+body #content #wrapper .modal-wrapper .left-content, #root #content #wrapper .modal-wrapper .left-content, .App #content #wrapper .modal-wrapper .left-content {
+  background-size: cover;
+  height: 95px;
+  background-position: center;
+  position: relative;
+}
+
+body #content #wrapper .modal-wrapper .left-content .new-image-url, #root #content #wrapper .modal-wrapper .left-content .new-image-url, .App #content #wrapper .modal-wrapper .left-content .new-image-url {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+}
+
+body #content #wrapper .modal-wrapper .right-content, #root #content #wrapper .modal-wrapper .right-content, .App #content #wrapper .modal-wrapper .right-content {
+  padding: 10px;
+  height: 75px;
+  position: relative;
+}
+
+body #content #wrapper .modal-wrapper .right-content .title, #root #content #wrapper .modal-wrapper .right-content .title, .App #content #wrapper .modal-wrapper .right-content .title {
+  font-weight: bold;
+}
+
+body #content #wrapper .modal-wrapper .right-content .new-title-wrapper, #root #content #wrapper .modal-wrapper .right-content .new-title-wrapper, .App #content #wrapper .modal-wrapper .right-content .new-title-wrapper {
+  width: 100%;
+}
+
+body #content #wrapper .modal-wrapper .right-content .new-title-wrapper .new-title, #root #content #wrapper .modal-wrapper .right-content .new-title-wrapper .new-title, .App #content #wrapper .modal-wrapper .right-content .new-title-wrapper .new-title {
+  width: 100%;
+  border: 0px;
+  border-bottom: 1px solid gray;
+  margin-bottom: 5px;
+}
+
+body #content #wrapper .modal-wrapper .right-content .new-url-wrapper, #root #content #wrapper .modal-wrapper .right-content .new-url-wrapper, .App #content #wrapper .modal-wrapper .right-content .new-url-wrapper {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 7fr 3fr;
+      grid-template-columns: 7fr 3fr;
+}
+
+body #content #wrapper .modal-wrapper .right-content .price, #root #content #wrapper .modal-wrapper .right-content .price, .App #content #wrapper .modal-wrapper .right-content .price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-right: 15px;
+  padding-bottom: 15px;
+}
+
+body #content #wrapper .modal-wrapper .right-content .price a, #root #content #wrapper .modal-wrapper .right-content .price a, .App #content #wrapper .modal-wrapper .right-content .price a {
+  color: white;
+}
+
+body #content #wrapper .modal-wrapper .right-content .footer, #root #content #wrapper .modal-wrapper .right-content .footer, .App #content #wrapper .modal-wrapper .right-content .footer {
+  position: absolute;
+  display: -ms-grid;
+  display: grid;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  bottom: 10px;
+  width: calc(100% - 20px);
+}
+
+body #content #wrapper .modal-wrapper .right-content .footer .rightBtn, #root #content #wrapper .modal-wrapper .right-content .footer .rightBtn, .App #content #wrapper .modal-wrapper .right-content .footer .rightBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+}
+
 body footer, #root footer, .App footer {
   background-color: #CCCCCC;
   position: absolute;

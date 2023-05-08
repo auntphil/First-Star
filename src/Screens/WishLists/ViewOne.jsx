@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import { db } from "../../utils/firebase"
 import { LoadingMagnifyingGlass, LoadingThreeCircles } from "../Loading"
 import {WishBox} from '../WishBox'
-import '../../styles/ProductBox.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPencil, faPlus, faSave, faX } from "@fortawesome/free-solid-svg-icons"
 
