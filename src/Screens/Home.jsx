@@ -1,6 +1,8 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Query } from 'appwrite';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { createDocument, listDocuments } from '../utils/appwrite';
 import { LoadingThreeCircles } from './Loading';
 
@@ -15,6 +17,7 @@ const Home = ( props ) => {
     const getWishLists = async() => {
       listDocuments('wishes', 'wish-lists',[])
         .then( response => {
+          console.log(response)
           setWishLists(response.documents)
           setLoading(false)
         })
@@ -51,10 +54,12 @@ const Home = ( props ) => {
           <div>The Sky Is Empty Tonight<br />Start a List</div>
         :
           <div>
-          <ul>
-            {wishLists.map(list => (
-              <li key={list.$id}>{list.name}</li>
-            ))}
+            <ul>
+              {wishLists.map(list => (
+                <Link to={`/wishes?list=${list.$id}`} key={list.$id}>
+                <li>{list.name} ({list.wishes.length})</li>
+                </Link>
+              ))}
             </ul>
           </div>
         }

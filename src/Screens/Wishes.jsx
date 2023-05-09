@@ -1,19 +1,15 @@
-import { addDoc, collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore"
 import { useEffect, useState } from "react"
-import { db } from "../../utils/firebase"
-import { LoadingMagnifyingGlass, LoadingThreeCircles } from "../Loading"
-import {WishBox} from '../WishBox'
+import { LoadingMagnifyingGlass, LoadingThreeCircles } from "./Loading"
+import {WishBox} from './WishBox'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPencil, faPlus, faSave, faX } from "@fortawesome/free-solid-svg-icons"
+import { createDocument, getDocument, listDocuments } from "../utils/appwrite"
+import { Query } from "appwrite"
 
-const ViewOne = ({user}) => {
-    const listId = new URLSearchParams(window.location.search).get('id')
+const Wishes = ({user}) => {
+    const listId = new URLSearchParams(window.location.search).get('list')
     const apiUrl = process.env.REACT_APP_API_URL
 
-    const docRef = doc(db,"lists",listId)
-    const colRef = collection(docRef, "wishes")
-
-    const [list, setList] = useState({})
     const [wishes, setWishes] = useState({})
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
@@ -33,43 +29,46 @@ const ViewOne = ({user}) => {
 
     useEffect(() => {
         const getList = async () => {
-            const doc = await getDoc(docRef)
-            const col = await getDocs(collection(docRef, "wishes"))
-            
-            let wishArray = []
-            col.forEach( wish => {
-                wishArray.push(wish)
+            getDocument('wishes','wish-lists', `${listId}`) 
+            .then( list =>{
+                setListTitle(list.name)
+                listDocuments('wishes','wishes',[Query.equal('wishLists',[`${listId}`])])
+                .then (wishes => {
+                    setWishes(wishes.documents)
+                    setLoading(false)
+                })
+                .catch(error => {
+                    console.log(error)
+                    setWishes([])
+                    setLoading(false)
+                })
             })
-
-            setListTitle(doc.data().name)
-                        
-            setList(doc)
-            setWishes(wishArray)
-            setLoading(false)
+            .catch( error => {
+                console.log(error)
+                setLoading(false)
+            })
         }
 
         getList()
     },[])
 
     const updateListTitle = async () => {
-        await updateDoc(docRef,{name: listTitle})
-        setListEdit(false)
     }
 
     const saveWish = async () => {
-        const data ={
-            image: wImageURL,
-            title: wTitle,
-            url: wURL
-        }
-        const docRef = await addDoc(colRef, data)
         const wish = {
-            id: docRef.id,
-            ...data
+            "name":wTitle,
+            "url":wURL.length === 0 ? null : wURL,
+            "image":wImageURL.length === 0 ? null : wImageURL,
+            "wishLists":[listId]
         }
-        wishes.push(wish)
-        setWishes(wishes)
-        handleCancelWish()
+        createDocument('wishes','wishes',wish)
+        .then(response => {
+            wishes.push(response)
+            setWishes(wishes)
+            handleCancelWish()
+        })
+        .catch(error => console.log(error))
     }
 
     const handleCancelWish = () => {
@@ -128,7 +127,7 @@ const ViewOne = ({user}) => {
                 { wishes.length === 0 ?
                     <div>No Wishes</div>
                     :
-                    wishes.map( wish => <WishBox wish={wish} key={wish.id} listId={listId} wishes={wishes} setWishes={setWishes} wishId={wish.id} user={user} listEdit={listEdit} />)
+                    wishes.map( wish => <WishBox wish={wish} key={wish.$id} listId={listId} wishes={wishes} setWishes={setWishes} wishId={wish.$id} user={user} listEdit={listEdit} />)
                 }
                 { showNewWish ?
                     <div className="product-box new-wish">
@@ -150,7 +149,7 @@ const ViewOne = ({user}) => {
                             <div className='footer'>
                                 <span>{ error ? errorMsg : ''}</span>
                                 <span></span>
-                                <span className="rightBtn"><button onClick={saveWish}>Save Wish</button></span>
+                                <span className="rightBtn"></span>
                             </div>
                         </div>
                     </div>
@@ -194,4 +193,4 @@ const ViewOne = ({user}) => {
     )
 }
 
-export default ViewOne
+export default Wishes

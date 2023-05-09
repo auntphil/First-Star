@@ -4,14 +4,13 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './Layout/Layout';
 import Home from './Screens/Home';
-import ViewAll from './Screens/WishLists/ViewAll';
-import ViewOne from './Screens/WishLists/ViewOne';
 import CreateAccount from './Screens/Account/CreateAccount';
 import { getCurrentUser } from './utils/appwrite';
 import { SignIn } from './Screens/Account/SignIn';
 
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import Wishes from './Screens/Wishes';
 
 export default function App(){
   const[user, setUser] = useState(null)
@@ -35,8 +34,7 @@ export default function App(){
           <Route index element={<Home user={user}/>}  />
           <Route path="signin" element={<SignIn setUser={setUser} />} />
           <Route path="register" element={<CreateAccount user={user} />} />
-          <Route path="lists" element={<ViewAll user={user} />} />
-          <Route path="list" element={<ViewOne user={user} />} />
+          <Route path="wishes" element={<Wishes user={user} />} />
         </Route>
       </Routes>
     </BrowserRouter>

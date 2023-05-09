@@ -185,7 +185,20 @@ body #content #wrapper .modal-wrapper .modal-inner-wrapper .modal-buttons button
   margin-left: 5px;
 }
 
-body #content #wrapper .modal-wrapper .remove-wish-wrapper, #root #content #wrapper .modal-wrapper .remove-wish-wrapper, .App #content #wrapper .modal-wrapper .remove-wish-wrapper {
+body #content #wrapper .product-box, #root #content #wrapper .product-box, .App #content #wrapper .product-box {
+  position: relative;
+  max-width: 100%;
+  width: 600px;
+  height: 95px;
+  overflow: hidden;
+  border-bottom: 1px solid black;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2fr;
+      grid-template-columns: 1fr 2fr;
+}
+
+body #content #wrapper .product-box .remove-wish-wrapper, #root #content #wrapper .product-box .remove-wish-wrapper, .App #content #wrapper .product-box .remove-wish-wrapper {
   position: absolute;
   padding: 5px;
   bottom: 5px;
@@ -193,7 +206,7 @@ body #content #wrapper .modal-wrapper .remove-wish-wrapper, #root #content #wrap
   cursor: pointer;
 }
 
-body #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn, #root #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn, .App #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn {
+body #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn, #root #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn, .App #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -205,7 +218,7 @@ body #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn, #ro
           align-items: center;
 }
 
-body #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn .remove-wish-text, #root #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn .remove-wish-text, .App #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn .remove-wish-text {
+body #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn .remove-wish-text, #root #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn .remove-wish-text, .App #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn .remove-wish-text {
   display: inline-block;
   width: 0px;
   overflow: hidden;
@@ -215,50 +228,50 @@ body #content #wrapper .modal-wrapper .remove-wish-wrapper .remove-wish-btn .rem
   margin-left: 3px;
 }
 
-body #content #wrapper .modal-wrapper .remove-wish-wrapper:hover .remove-wish-text, #root #content #wrapper .modal-wrapper .remove-wish-wrapper:hover .remove-wish-text, .App #content #wrapper .modal-wrapper .remove-wish-wrapper:hover .remove-wish-text {
+body #content #wrapper .product-box .remove-wish-wrapper:hover .remove-wish-text, #root #content #wrapper .product-box .remove-wish-wrapper:hover .remove-wish-text, .App #content #wrapper .product-box .remove-wish-wrapper:hover .remove-wish-text {
   width: 56px;
 }
 
-body #content #wrapper .modal-wrapper:first-child, #root #content #wrapper .modal-wrapper:first-child, .App #content #wrapper .modal-wrapper:first-child {
+body #content #wrapper .product-box:first-child, #root #content #wrapper .product-box:first-child, .App #content #wrapper .product-box:first-child {
   border-top: 1px solid black;
 }
 
-body #content #wrapper .modal-wrapper .left-content, #root #content #wrapper .modal-wrapper .left-content, .App #content #wrapper .modal-wrapper .left-content {
+body #content #wrapper .product-box .left-content, #root #content #wrapper .product-box .left-content, .App #content #wrapper .product-box .left-content {
   background-size: cover;
   height: 95px;
   background-position: center;
   position: relative;
 }
 
-body #content #wrapper .modal-wrapper .left-content .new-image-url, #root #content #wrapper .modal-wrapper .left-content .new-image-url, .App #content #wrapper .modal-wrapper .left-content .new-image-url {
+body #content #wrapper .product-box .left-content .new-image-url, #root #content #wrapper .product-box .left-content .new-image-url, .App #content #wrapper .product-box .left-content .new-image-url {
   position: absolute;
   bottom: 10px;
   left: 0;
   width: 100%;
 }
 
-body #content #wrapper .modal-wrapper .right-content, #root #content #wrapper .modal-wrapper .right-content, .App #content #wrapper .modal-wrapper .right-content {
+body #content #wrapper .product-box .right-content, #root #content #wrapper .product-box .right-content, .App #content #wrapper .product-box .right-content {
   padding: 10px;
   height: 75px;
   position: relative;
 }
 
-body #content #wrapper .modal-wrapper .right-content .title, #root #content #wrapper .modal-wrapper .right-content .title, .App #content #wrapper .modal-wrapper .right-content .title {
+body #content #wrapper .product-box .right-content .title, #root #content #wrapper .product-box .right-content .title, .App #content #wrapper .product-box .right-content .title {
   font-weight: bold;
 }
 
-body #content #wrapper .modal-wrapper .right-content .new-title-wrapper, #root #content #wrapper .modal-wrapper .right-content .new-title-wrapper, .App #content #wrapper .modal-wrapper .right-content .new-title-wrapper {
+body #content #wrapper .product-box .right-content .new-title-wrapper, #root #content #wrapper .product-box .right-content .new-title-wrapper, .App #content #wrapper .product-box .right-content .new-title-wrapper {
   width: 100%;
 }
 
-body #content #wrapper .modal-wrapper .right-content .new-title-wrapper .new-title, #root #content #wrapper .modal-wrapper .right-content .new-title-wrapper .new-title, .App #content #wrapper .modal-wrapper .right-content .new-title-wrapper .new-title {
+body #content #wrapper .product-box .right-content .new-title-wrapper .new-title, #root #content #wrapper .product-box .right-content .new-title-wrapper .new-title, .App #content #wrapper .product-box .right-content .new-title-wrapper .new-title {
   width: 100%;
   border: 0px;
   border-bottom: 1px solid gray;
   margin-bottom: 5px;
 }
 
-body #content #wrapper .modal-wrapper .right-content .new-url-wrapper, #root #content #wrapper .modal-wrapper .right-content .new-url-wrapper, .App #content #wrapper .modal-wrapper .right-content .new-url-wrapper {
+body #content #wrapper .product-box .right-content .new-url-wrapper, #root #content #wrapper .product-box .right-content .new-url-wrapper, .App #content #wrapper .product-box .right-content .new-url-wrapper {
   width: 100%;
   display: -ms-grid;
   display: grid;
@@ -266,7 +279,7 @@ body #content #wrapper .modal-wrapper .right-content .new-url-wrapper, #root #co
       grid-template-columns: 7fr 3fr;
 }
 
-body #content #wrapper .modal-wrapper .right-content .price, #root #content #wrapper .modal-wrapper .right-content .price, .App #content #wrapper .modal-wrapper .right-content .price {
+body #content #wrapper .product-box .right-content .price, #root #content #wrapper .product-box .right-content .price, .App #content #wrapper .product-box .right-content .price {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -277,11 +290,11 @@ body #content #wrapper .modal-wrapper .right-content .price, #root #content #wra
   padding-bottom: 15px;
 }
 
-body #content #wrapper .modal-wrapper .right-content .price a, #root #content #wrapper .modal-wrapper .right-content .price a, .App #content #wrapper .modal-wrapper .right-content .price a {
+body #content #wrapper .product-box .right-content .price a, #root #content #wrapper .product-box .right-content .price a, .App #content #wrapper .product-box .right-content .price a {
   color: white;
 }
 
-body #content #wrapper .modal-wrapper .right-content .footer, #root #content #wrapper .modal-wrapper .right-content .footer, .App #content #wrapper .modal-wrapper .right-content .footer {
+body #content #wrapper .product-box .right-content .footer, #root #content #wrapper .product-box .right-content .footer, .App #content #wrapper .product-box .right-content .footer {
   position: absolute;
   display: -ms-grid;
   display: grid;
@@ -293,7 +306,7 @@ body #content #wrapper .modal-wrapper .right-content .footer, #root #content #wr
   width: calc(100% - 20px);
 }
 
-body #content #wrapper .modal-wrapper .right-content .footer .rightBtn, #root #content #wrapper .modal-wrapper .right-content .footer .rightBtn, .App #content #wrapper .modal-wrapper .right-content .footer .rightBtn {
+body #content #wrapper .product-box .right-content .footer .rightBtn, #root #content #wrapper .product-box .right-content .footer .rightBtn, .App #content #wrapper .product-box .right-content .footer .rightBtn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

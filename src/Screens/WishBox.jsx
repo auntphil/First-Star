@@ -24,22 +24,17 @@ export const WishBox = ({wish, listId, wishId, wishes, setWishes, user, listEdit
         }
     }
 
-    if(wish.title){
-        data = wish
-    }else{
-        data = wish.data()
-    }
     return(
         <div className='product-box item'>
-            <a href={data.url} target="_blank" rel="noreferrer">
+            <a href={wish.url} target="_blank" rel="noreferrer">
                 <div className="left-content"
-                    style={{backgroundImage: `url(${data.image})`}}
+                    style={{backgroundImage: `url(${wish.image})`}}
                 >
             </div>
             </a>
             <div className='right-content'>
-                <a href={data.url} target="_blank" rel="noreferrer" className='boringLink'>
-                    <span className='title'>{data.title}</span>
+                <a href={wish.url} target="_blank" rel="noreferrer" className='boringLink'>
+                    <span className='title'>{wish.name}</span>
                 </a>
                 <span className='footer'>
                     <span className='footer-space'>Store Logo</span>
