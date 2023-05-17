@@ -112,7 +112,7 @@ body, #root, .App
                 overflow: hidden
                 border-bottom: 1px solid black
                 display: grid
-                grid-template-columns: 1fr 2fr
+                grid-template-columns: 40% 1fr
                 .remove-wish-wrapper
                     position: absolute
                     padding: 5px
@@ -148,10 +148,15 @@ body, #root, .App
                         width: 100%
                 .right-content
                     padding: 10px
-                    height: 75px
                     position: relative
+                    text-align: left
                     .title
+                        font-size: 1.1rem
                         font-weight: bold
+                        white-space: nowrap
+                        text-overflow: ellipsis
+                        display: inline-block
+                        overflow: hidden
                     .new-title-wrapper
                         width: 100%
                         .new-title

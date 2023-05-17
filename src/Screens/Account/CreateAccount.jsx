@@ -1,4 +1,3 @@
-import { ID } from 'appwrite'
 import { useState } from 'react'
 import {  createUser } from '../../utils/appwrite'
 

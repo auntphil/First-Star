@@ -1,45 +1,38 @@
-import { deleteDoc, doc } from 'firebase/firestore'
-import { useState } from 'react'
-import { db } from '../utils/firebase'
+import { useEffect, useState } from 'react'
 import {LoadingThreeCircles} from '../Screens/Loading'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-export const WishBox = ({wish, listId, wishId, wishes, setWishes, user, listEdit}) => {
-    let data = {}
+export const WishBox = ({wish, wishId, user, listEdit, handleDeleteWish}) => {
 
     let [loading, setLoading] = useState(false)
+    let [errorMsg, setErrorMsg] = useState('')
 
-    const removeWish = async () => {
+    useEffect( () => {
+    }, [])
+
+    const handleRemoveWish = async (id) => {
         setLoading(true)
-        try{
-            //Remove from FireStore
-            const wishRef = doc(db, `lists/${listId}/wishes`, wishId)
-            await deleteDoc(wishRef)
-
-            //Remove from State
-            setWishes(wishes.filter( w => w.id !== wishId))
-        }catch(err){
-            console.error(err)
+        const status = await handleDeleteWish(wishId)
+        if( !status ){
+            setErrorMsg('Failed to remove wish')
         }
+        setLoading(false)
     }
 
     return(
         <div className='product-box item'>
-            <a href={wish.url} target="_blank" rel="noreferrer">
-                <div className="left-content"
-                    style={{backgroundImage: `url(${wish.image})`}}
-                >
-            </div>
-            </a>
+            <div className="left-content" style={{backgroundImage: `url(${wish.image})`}} ></div>
             <div className='right-content'>
-                <a href={wish.url} target="_blank" rel="noreferrer" className='boringLink'>
-                    <span className='title'>{wish.name}</span>
-                </a>
+                <h3 className='title'>{wish.name}</h3>
                 <span className='footer'>
-                    <span className='footer-space'>Store Logo</span>
+                    <span className='footer-space'>
+                        {wish.url.map( url => (
+                            <a href={url} target="_blank" rel="noreferrer" className='boringLink' key={url}>Link</a>
+                        ))}
+                    </span>
                     <span className='footer-space'>Priority</span>
-                    <span className='footer-space'></span>
+                    <span className='footer-space'>{errorMsg}</span>
                 </span>
             </div>
             <span className='remove-wish-wrapper'>
@@ -48,7 +41,7 @@ export const WishBox = ({wish, listId, wishId, wishes, setWishes, user, listEdit
                         <LoadingThreeCircles s={'22'} p={'0px'} />
                     :
                         user && listEdit ?
-                            <div className="remove-wish-btn" onClick={removeWish}><FontAwesomeIcon icon={faTrash} style={{color: '#b12525' }} /><span className="remove-wish-text">Trash</span></div>
+                            <div className="remove-wish-btn" onClick={handleRemoveWish}><FontAwesomeIcon icon={faTrash} style={{color: '#b12525' }} /><span className="remove-wish-text">Trash</span></div>
                         :
                         ''
                 }

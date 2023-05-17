@@ -194,8 +194,8 @@ body #content #wrapper .product-box, #root #content #wrapper .product-box, .App 
   border-bottom: 1px solid black;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 2fr;
-      grid-template-columns: 1fr 2fr;
+  -ms-grid-columns: 40% 1fr;
+      grid-template-columns: 40% 1fr;
 }
 
 body #content #wrapper .product-box .remove-wish-wrapper, #root #content #wrapper .product-box .remove-wish-wrapper, .App #content #wrapper .product-box .remove-wish-wrapper {
@@ -252,12 +252,17 @@ body #content #wrapper .product-box .left-content .new-image-url, #root #content
 
 body #content #wrapper .product-box .right-content, #root #content #wrapper .product-box .right-content, .App #content #wrapper .product-box .right-content {
   padding: 10px;
-  height: 75px;
   position: relative;
+  text-align: left;
 }
 
 body #content #wrapper .product-box .right-content .title, #root #content #wrapper .product-box .right-content .title, .App #content #wrapper .product-box .right-content .title {
+  font-size: 1.1rem;
   font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+  overflow: hidden;
 }
 
 body #content #wrapper .product-box .right-content .new-title-wrapper, #root #content #wrapper .product-box .right-content .new-title-wrapper, .App #content #wrapper .product-box .right-content .new-title-wrapper {

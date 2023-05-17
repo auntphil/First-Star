@@ -1,6 +1,5 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Query } from 'appwrite';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createDocument, listDocuments } from '../utils/appwrite';
@@ -17,7 +16,6 @@ const Home = ( props ) => {
     const getWishLists = async() => {
       listDocuments('wishes', 'wish-lists',[])
         .then( response => {
-          console.log(response)
           setWishLists(response.documents)
           setLoading(false)
         })

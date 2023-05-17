@@ -3,7 +3,7 @@ import { LoadingMagnifyingGlass, LoadingThreeCircles } from "./Loading"
 import {WishBox} from './WishBox'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPencil, faPlus, faSave, faX } from "@fortawesome/free-solid-svg-icons"
-import { createDocument, getDocument, listDocuments } from "../utils/appwrite"
+import { createDocument, deleteDocument, getDocument, listDocuments } from "../utils/appwrite"
 import { Query } from "appwrite"
 
 const Wishes = ({user}) => {
@@ -22,11 +22,13 @@ const Wishes = ({user}) => {
     //New Wish
     const [showNewWish, setShowNewWish] = useState(false)
     const [loadingNewItem, setLoadingNewItem] = useState(false)
-    const [wURL, setWURL] = useState("")
+    const [wURL1, setWURL1] = useState("")
+    const [wURL2, setWURL2] = useState("")
+    const [wURL3, setWURL3] = useState("")
     const [wTitle, setWTitle] = useState("")
     const [wImageURL, setwImageURL] = useState("")
-
-
+    
+    
     useEffect(() => {
         const getList = async () => {
             getDocument('wishes','wish-lists', `${listId}`) 
@@ -48,19 +50,25 @@ const Wishes = ({user}) => {
                 setLoading(false)
             })
         }
-
+        
         getList()
-    },[])
-
+    },[listId])
+    
     const updateListTitle = async () => {
     }
-
+    
     const saveWish = async () => {
+        const urls = []
+        if( wURL1.length !== 0 ){urls.push(wURL1)}
+        if( wURL2.length !== 0 ){urls.push(wURL2)}
+        if( wURL3.length !== 0 ){urls.push(wURL3)}
+
+
         const wish = {
             "name":wTitle,
-            "url":wURL.length === 0 ? null : wURL,
+            "url": urls,
             "image":wImageURL.length === 0 ? null : wImageURL,
-            "wishLists":[listId]
+            "wishLists":listId
         }
         createDocument('wishes','wishes',wish)
         .then(response => {
@@ -71,9 +79,24 @@ const Wishes = ({user}) => {
         .catch(error => console.log(error))
     }
 
+    const handleDeleteWish = async (id) => {
+        try{
+            //Remove from Datastore
+            await deleteDocument('wishes','wishes',id)
+            //Successfull
+            setWishes(wishes.filter( w => w.$id !== id))
+            return true
+        }catch(err){
+            console.error(err)
+            return false
+        }
+    }
+
     const handleCancelWish = () => {
         setShowNewWish(false)
-        setWURL('')
+        setWURL1('')
+        setWURL2('')
+        setWURL3('')
         setwImageURL('')
         setWTitle('')
     }
@@ -81,20 +104,20 @@ const Wishes = ({user}) => {
     const fetchWish = () => {
         setLoadingNewItem(true)
         setError(false)
-        if( wURL === "" ) return
+        if( wURL1 === "" ) return
     
         fetch(`${apiUrl}get-product`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
             },
-            body: JSON.stringify({"url": `${wURL}`})
+            body: JSON.stringify({"url": `${wURL1}`})
             })
             .then( res => {
                 if( res.status === 200){
                     res.json()
                         .then( async data => {
-                        setWURL(data.url)
+                        setWURL1(data.url)
                         setwImageURL(data.image)
                         setWTitle(data.title)
                         setLoadingNewItem(false)
@@ -127,7 +150,14 @@ const Wishes = ({user}) => {
                 { wishes.length === 0 ?
                     <div>No Wishes</div>
                     :
-                    wishes.map( wish => <WishBox wish={wish} key={wish.$id} listId={listId} wishes={wishes} setWishes={setWishes} wishId={wish.$id} user={user} listEdit={listEdit} />)
+                    wishes.map( wish => <WishBox
+                        wish={wish}
+                        key={wish.$id}
+                        wishId={wish.$id}
+                        user={user}
+                        listEdit={listEdit}
+                        handleDeleteWish={handleDeleteWish}
+                        />)
                 }
                 { showNewWish ?
                     <div className="product-box new-wish">
@@ -144,7 +174,9 @@ const Wishes = ({user}) => {
                                 <input type="text" placeholder='New Wish Title' className='title new-title' value={wTitle} onChange={(e) => {setWTitle(e.target.value)}} />
                             </div>
                             <div className="new-url-wrapper">
-                                <input type="text" placeholder='New Wish URL' value={wURL} onChange={(e) => setWURL(e.target.value)} /><button onClick={fetchWish}>Fetch Wish</button>
+                                <input type="text" placeholder='New Wish URL' value={wURL1} onChange={(e) => setWURL1(e.target.value)} /><button onClick={fetchWish}>Fetch Wish</button>
+                                <input type="text" placeholder='New Wish URL' value={wURL2} onChange={(e) => setWURL2(e.target.value)} /><button onClick={fetchWish}>Fetch Wish</button>
+                                <input type="text" placeholder='New Wish URL' value={wURL3} onChange={(e) => setWURL3(e.target.value)} /><button onClick={fetchWish}>Fetch Wish</button>
                             </div>
                             <div className='footer'>
                                 <span>{ error ? errorMsg : ''}</span>
