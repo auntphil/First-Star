@@ -1,4 +1,4 @@
-import { Account, Client, Databases, ID } from 'appwrite'
+import { Account, Client, Databases, Functions, ID } from 'appwrite'
 
 const client = new Client()
     .setEndpoint(process.env.REACT_APP_APPWRITE_ENDPOINT)
@@ -6,6 +6,7 @@ const client = new Client()
 
 const account = new Account(client)
 const databases = new Databases(client)
+const functions = new Functions(client)
 
 //User
 const createUser = (email, password, name) => account.create(ID.unique(), email, password, name)
@@ -19,7 +20,11 @@ const listDocuments = (databaseID, collectionID, query) => databases.listDocumen
 const getDocument = (databaseID, collectionID, documentID) => databases.getDocument(`${databaseID}`, `${collectionID}`, `${documentID}`)
 const deleteDocument = (databaseID, collectionID, documentID) => databases.deleteDocument(`${databaseID}`, `${collectionID}`, `${documentID}`)
 
+//Functions
+const createProductInfo = (url) => functions.createExecution("645594ed49b51c758c6d", `{"url" : "${url}"}`, true)
+const getProductInfo = (id) => functions.getExecution("645594ed49b51c758c6d",`${id}`)
 
 
 
-export {account, client, createUser, loginUser, getCurrentUser, logoutUser, createDocument, listDocuments, getDocument, deleteDocument}
+
+export {account, client, createUser, loginUser, getCurrentUser, logoutUser, createDocument, listDocuments, getDocument, deleteDocument, createProductInfo, getProductInfo}

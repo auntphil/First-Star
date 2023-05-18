@@ -3,12 +3,11 @@ import { LoadingMagnifyingGlass, LoadingThreeCircles } from "./Loading"
 import {WishBox} from './WishBox'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPencil, faPlus, faSave, faX } from "@fortawesome/free-solid-svg-icons"
-import { createDocument, deleteDocument, getDocument, listDocuments } from "../utils/appwrite"
+import { createDocument, createProductInfo, deleteDocument, getDocument, getProductInfo, listDocuments } from "../utils/appwrite"
 import { Query } from "appwrite"
 
 const Wishes = ({user}) => {
     const listId = new URLSearchParams(window.location.search).get('list')
-    const apiUrl = process.env.REACT_APP_API_URL
 
     const [wishes, setWishes] = useState({})
     const [loading, setLoading] = useState(true)
@@ -101,38 +100,45 @@ const Wishes = ({user}) => {
         setWTitle('')
     }
 
-    const fetchWish = () => {
+    const checkFunctionStatus = async (id, count = 0) => {
+        getProductInfo(id)
+            .then( funcData => {
+                if( funcData.status === "completed" || funcData.status === "failed" ){
+                    let data = JSON.parse(funcData.response)
+                    if(data.success){
+                        console.log(data)
+                        setwImageURL(data.image)
+                        setWTitle(data.name)
+                        setWURL1(data.url)
+                    }else{
+                        console.log("Failed to load item")
+                        setErrorMsg("Failed to load item")
+                    }
+                    setLoadingNewItem(false)
+                } else {    
+                    count++
+                    if(count < 10){
+                        setTimeout(() => checkFunctionStatus(id, count), 2000);
+                    }else{
+                        console.log("Failed to load item")
+                        setErrorMsg("Failed to load item")
+                    }
+                }
+            }, error => {
+                console.log(error)
+            })
+    }
+
+    const fetchWish = async () => {
         setLoadingNewItem(true)
         setError(false)
         if( wURL1 === "" ) return
-    
-        fetch(`${apiUrl}get-product`, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({"url": `${wURL1}`})
-            })
-            .then( res => {
-                if( res.status === 200){
-                    res.json()
-                        .then( async data => {
-                        setWURL1(data.url)
-                        setwImageURL(data.image)
-                        setWTitle(data.title)
-                        setLoadingNewItem(false)
-                        })
-                }else{
-                    setError(true)
-                    setErrorMsg("Error Fetching")
-                    setLoadingNewItem(false)
-                }
-            })
-            .catch( err => {
-                console.error(err)
-                setError(true)
-                setErrorMsg("Error Fetching Data")
-                setLoadingNewItem(false)
+
+        createProductInfo(wURL1)
+            .then( async response => {
+                setTimeout(() => checkFunctionStatus(response.$id), 2000);
+            }, error => {
+                console.log(error)
             })
     }
 

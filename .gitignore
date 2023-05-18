@@ -22,3 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .env
+App/node_modules/
+Functions/GetProductInfo/code.tar.gz
