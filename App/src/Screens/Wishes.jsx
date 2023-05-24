@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { LoadingMagnifyingGlass, LoadingThreeCircles } from "./Loading"
 import {WishBox} from './WishBox'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPencil, faPlus, faSave, faX } from "@fortawesome/free-solid-svg-icons"
+import { faMagnifyingGlass, faPencil, faPlus, faSave, faX } from "@fortawesome/free-solid-svg-icons"
 import { createDocument, createProductInfo, deleteDocument, getDocument, getProductInfo, listDocuments } from "../utils/appwrite"
 import { Query } from "appwrite"
 
@@ -106,7 +106,6 @@ const Wishes = ({user}) => {
                 if( funcData.status === "completed" || funcData.status === "failed" ){
                     let data = JSON.parse(funcData.response)
                     if(data.success){
-                        console.log(data)
                         setwImageURL(data.image)
                         setWTitle(data.name)
                         setWURL1(data.url)
@@ -166,28 +165,54 @@ const Wishes = ({user}) => {
                         />)
                 }
                 { showNewWish ?
-                    <div className="product-box new-wish">
-                        <div className='left-content' style={{backgroundImage: `url(${wImageURL})`}} >
-                            { loadingNewItem ?
-                                <LoadingMagnifyingGlass s={'70px'} />
-                                :
-                                ''
-                            }
-                            <input type="text" placeholder='New Wish Image' value={wImageURL} onChange={(e) => setwImageURL(e.target.value)} className="new-image-url" />
-                        </div>
-                        <div className="right-content">
-                            <div className="new-title-wrapper">
-                                <input type="text" placeholder='New Wish Title' className='title new-title' value={wTitle} onChange={(e) => {setWTitle(e.target.value)}} />
+                    <div className="product-box">
+                        <h2>Make a Wish</h2>
+                        <div className="product-box-wrapper new-wish">
+                            <div className='left-content' style={{backgroundImage: `url(${wImageURL})`}} >
+                                { loadingNewItem ?
+                                    <LoadingMagnifyingGlass s={'70px'} />
+                                    :
+                                    ''
+                                }
+                                <div className="image-input-wrapper">
+
+                                    <div className="input-wrapper-inner single">
+                                        <input type="text" placeholder='Image Url' value={wImageURL} onChange={(e) => setwImageURL(e.target.value)} className="new-image-url" />
+                                    </div>
+                                </div>  
                             </div>
-                            <div className="new-url-wrapper">
-                                <input type="text" placeholder='New Wish URL' value={wURL1} onChange={(e) => setWURL1(e.target.value)} /><button onClick={fetchWish}>Fetch Wish</button>
-                                <input type="text" placeholder='New Wish URL' value={wURL2} onChange={(e) => setWURL2(e.target.value)} /><button onClick={fetchWish}>Fetch Wish</button>
-                                <input type="text" placeholder='New Wish URL' value={wURL3} onChange={(e) => setWURL3(e.target.value)} /><button onClick={fetchWish}>Fetch Wish</button>
-                            </div>
-                            <div className='footer'>
-                                <span>{ error ? errorMsg : ''}</span>
-                                <span></span>
-                                <span className="rightBtn"></span>
+                            <div className="right-content">
+                                <div className="input-wrapper-inner single">
+                                    <input type="text" placeholder='Title' className='title new-title ' value={wTitle} onChange={(e) => {setWTitle(e.target.value)}} />
+                                </div>
+                                <div className="new-url-wrapper">
+                                    <div className="input-wrapper-inner">
+                                        <div className="favIcon">
+                                        { loadingNewItem ?
+                                            <LoadingMagnifyingGlass s={'29px'} />
+                                            :
+                                            ''
+                                        }
+                                        </div>
+                                        <input type="text" placeholder='1st Link' value={wURL1} onChange={(e) => setWURL1(e.target.value)} />
+                                        <button onClick={fetchWish} className="btn btn-info">
+                                            <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: '#FFFFFF', fontSize: '0.75rem'}} />
+                                        </button>
+                                    </div>
+                                    <div className="input-wrapper-inner">
+                                        <div className="favIcon"></div>
+                                        <input type="text" placeholder='2nd Link' value={wURL2} onChange={(e) => setWURL2(e.target.value)} />
+                                    </div>
+                                    <div className="input-wrapper-inner">
+                                        <div className="favIcon"></div>
+                                        <input type="text" placeholder='3rd Link' value={wURL3} onChange={(e) => setWURL3(e.target.value)} />
+                                    </div>
+                                </div>
+                                <div className='footer'>
+                                    <span>{ error ? errorMsg : ''}</span>
+                                    <span></span>
+                                    <span className="rightBtn"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -199,26 +224,26 @@ const Wishes = ({user}) => {
             <div id="wish-floating-btn">
                 {
                     !listEdit && !showNewWish ?
-                        <>
-                            <div onClick={() => {setShowNewWish(true)}} className="floating-btn" id="new-wish-btn"><FontAwesomeIcon icon={faPlus} style={{color: '#FFFFFF', fontSize: '2rem'}}/></div>
-                            <div onClick={() => {setListEdit(true)}}className="floating-btn" id="edit-list-btn"><FontAwesomeIcon icon={faPencil} style={{color: '#FFFFFF', fontSize: '0.75rem'}}/></div>
-                        </>
+                        <div id="bottom-button-wrapper">
+                            <div onClick={() => {setShowNewWish(true)}} className="bottom-button left" id="new-wish-btn"><FontAwesomeIcon icon={faPlus} style={{color: '#FFFFFF', fontSize: '2rem'}}/></div>
+                            <div onClick={() => {setListEdit(true)}}className="bottom-button right" id="edit-list-btn"><FontAwesomeIcon icon={faPencil} style={{color: '#FFFFFF', fontSize: '1.25rem'}}/></div>
+                        </div>
                     :
                         <>
                             {
                                 listEdit ?
-                                    <>
-                                        <div onClick={updateListTitle} className="floating-btn" id="new-wish-btn"><FontAwesomeIcon icon={faSave} style={{color: '#FFFFFF', fontSize: '2rem'}}/></div>
-                                        <div onClick={() => {setListEdit(false)}}className="floating-btn" id="close-list-btn"><FontAwesomeIcon icon={faX} style={{color: '#FFFFFF', fontSize: '0.75rem'}}/></div>
-                                    </>
+                                    <div id="bottom-button-wrapper">
+                                        <div onClick={updateListTitle} className="bottom-button left" id="new-wish-btn"><FontAwesomeIcon icon={faSave} style={{color: '#FFFFFF', fontSize: '2rem'}}/></div>
+                                        <div onClick={() => {setListEdit(false)}}className="bottom-button right" id="close-list-btn"><FontAwesomeIcon icon={faX} style={{color: '#FFFFFF', fontSize: '1.25rem'}}/></div>
+                                    </div>
                                 :
                                     <>
                                         {
                                             showNewWish ?
-                                                <>
-                                                    <div onClick={saveWish} className="floating-btn" id="new-wish-btn"><FontAwesomeIcon icon={faSave} style={{color: '#FFFFFF', fontSize: '2rem'}}/></div>
-                                                    <div onClick={handleCancelWish}className="floating-btn" id="close-list-btn"><FontAwesomeIcon icon={faX} style={{color: '#FFFFFF', fontSize: '0.75rem'}}/></div>
-                                                </>
+                                                <div id="bottom-button-wrapper">
+                                                    <div onClick={saveWish} className="bottom-button left" id="new-wish-btn"><FontAwesomeIcon icon={faSave} style={{color: '#FFFFFF', fontSize: '2rem'}}/></div>
+                                                    <div onClick={handleCancelWish}className="bottom-button right" id="close-list-btn"><FontAwesomeIcon icon={faX} style={{color: '#FFFFFF', fontSize: '1.25rem'}}/></div>
+                                                </div>
                                             :
                                                 ''
                                         }

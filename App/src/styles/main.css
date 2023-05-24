@@ -70,9 +70,9 @@ body .App-header #userHeader #header-btn-wrapper .btn:first-child, #root .App-he
 }
 
 body #content, #root #content, .App #content {
-  min-height: calc(100vh - 250px);
-  padding-bottom: 175px;
-  padding-top: 75px;
+  min-height: calc(100vh - 150px);
+  padding-bottom: 55px;
+  padding-top: 50px;
   max-width: 750px;
   margin: auto;
   display: -webkit-box;
@@ -83,52 +83,8 @@ body #content, #root #content, .App #content {
 
 body #content #wrapper, #root #content #wrapper, .App #content #wrapper {
   text-align: center;
-  max-width: 50vw;
   margin: auto;
-}
-
-body #content #wrapper .floating-btn, #root #content #wrapper .floating-btn, .App #content #wrapper .floating-btn {
-  cursor: pointer;
-  position: absolute;
-  bottom: 165px;
-  z-index: 98;
-  border-radius: 150px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-body #content #wrapper #new-wish-btn, #root #content #wrapper #new-wish-btn, .App #content #wrapper #new-wish-btn {
-  right: 15px;
-  background-color: #089708;
-  height: 55px;
-  width: 55px;
-  -webkit-filter: drop-shadow(0 0 0.75rem #089708);
-          filter: drop-shadow(0 0 0.75rem #089708);
-}
-
-body #content #wrapper #edit-list-btn, #root #content #wrapper #edit-list-btn, .App #content #wrapper #edit-list-btn {
-  right: 75px;
-  background-color: #d1881a;
-  height: 25px;
-  width: 25px;
-  -webkit-filter: drop-shadow(0 0 0.75rem #d1881a);
-          filter: drop-shadow(0 0 0.75rem #d1881a);
-}
-
-body #content #wrapper #close-list-btn, #root #content #wrapper #close-list-btn, .App #content #wrapper #close-list-btn {
-  right: 75px;
-  background-color: #b12525;
-  height: 25px;
-  width: 25px;
-  -webkit-filter: drop-shadow(0 0 0.75rem #b12525);
-          filter: drop-shadow(0 0 0.75rem #b12525);
+  width: 100%;
 }
 
 body #content #wrapper .modal-wrapper, #root #content #wrapper .modal-wrapper, .App #content #wrapper .modal-wrapper {
@@ -185,20 +141,19 @@ body #content #wrapper .modal-wrapper .modal-inner-wrapper .modal-buttons button
   margin-left: 5px;
 }
 
-body #content #wrapper .product-box, #root #content #wrapper .product-box, .App #content #wrapper .product-box {
+body #content #wrapper .product-box .product-box-wrapper, #root #content #wrapper .product-box .product-box-wrapper, .App #content #wrapper .product-box .product-box-wrapper {
   position: relative;
-  max-width: 100%;
-  width: 600px;
+  width: 100%;
   height: 95px;
   overflow: hidden;
   border-bottom: 1px solid black;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 40% 1fr;
-      grid-template-columns: 40% 1fr;
+  -ms-grid-columns: 33% 1fr;
+      grid-template-columns: 33% 1fr;
 }
 
-body #content #wrapper .product-box .remove-wish-wrapper, #root #content #wrapper .product-box .remove-wish-wrapper, .App #content #wrapper .product-box .remove-wish-wrapper {
+body #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper, #root #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper, .App #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper {
   position: absolute;
   padding: 5px;
   bottom: 5px;
@@ -206,7 +161,7 @@ body #content #wrapper .product-box .remove-wish-wrapper, #root #content #wrappe
   cursor: pointer;
 }
 
-body #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn, #root #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn, .App #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn {
+body #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper .remove-wish-btn, #root #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper .remove-wish-btn, .App #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper .remove-wish-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -218,7 +173,7 @@ body #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn, #root
           align-items: center;
 }
 
-body #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn .remove-wish-text, #root #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn .remove-wish-text, .App #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn .remove-wish-text {
+body #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper .remove-wish-btn .remove-wish-text, #root #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper .remove-wish-btn .remove-wish-text, .App #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper .remove-wish-btn .remove-wish-text {
   display: inline-block;
   width: 0px;
   overflow: hidden;
@@ -228,63 +183,147 @@ body #content #wrapper .product-box .remove-wish-wrapper .remove-wish-btn .remov
   margin-left: 3px;
 }
 
-body #content #wrapper .product-box .remove-wish-wrapper:hover .remove-wish-text, #root #content #wrapper .product-box .remove-wish-wrapper:hover .remove-wish-text, .App #content #wrapper .product-box .remove-wish-wrapper:hover .remove-wish-text {
+body #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper:hover .remove-wish-text, #root #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper:hover .remove-wish-text, .App #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper:hover .remove-wish-text {
   width: 56px;
 }
 
-body #content #wrapper .product-box:first-child, #root #content #wrapper .product-box:first-child, .App #content #wrapper .product-box:first-child {
+body #content #wrapper .product-box .product-box-wrapper:first-child, #root #content #wrapper .product-box .product-box-wrapper:first-child, .App #content #wrapper .product-box .product-box-wrapper:first-child {
   border-top: 1px solid black;
 }
 
-body #content #wrapper .product-box .left-content, #root #content #wrapper .product-box .left-content, .App #content #wrapper .product-box .left-content {
+body #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner, #root #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner, .App #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner {
+  width: 100%;
+  height: 30px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 30px 1fr;
+      grid-template-columns: 30px 1fr;
+  padding: 0px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #0dcaf0;
+}
+
+body #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner.single, #root #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner.single, .App #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner.single {
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+body #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner:last-child, #root #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner:last-child, .App #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner:last-child {
+  margin-bottom: 0px;
+}
+
+body #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner .new-image-url, #root #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner .new-image-url, .App #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner .new-image-url {
+  width: 100%;
+}
+
+body #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner input, #root #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner input, .App #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner input {
+  padding: 0px 10px;
+  border-bottom: 0px;
+}
+
+body #content #wrapper .product-box .product-box-wrapper .left-content, #root #content #wrapper .product-box .product-box-wrapper .left-content, .App #content #wrapper .product-box .product-box-wrapper .left-content {
   background-size: cover;
-  height: 95px;
+  height: 100%;
   background-position: center;
   position: relative;
 }
 
-body #content #wrapper .product-box .left-content .new-image-url, #root #content #wrapper .product-box .left-content .new-image-url, .App #content #wrapper .product-box .left-content .new-image-url {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 100%;
+body #content #wrapper .product-box .product-box-wrapper .left-content .image-input-wrapper, #root #content #wrapper .product-box .product-box-wrapper .left-content .image-input-wrapper, .App #content #wrapper .product-box .product-box-wrapper .left-content .image-input-wrapper {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding: 10px;
 }
 
-body #content #wrapper .product-box .right-content, #root #content #wrapper .product-box .right-content, .App #content #wrapper .product-box .right-content {
+body #content #wrapper .product-box .product-box-wrapper .right-content, #root #content #wrapper .product-box .product-box-wrapper .right-content, .App #content #wrapper .product-box .product-box-wrapper .right-content {
   padding: 10px;
   position: relative;
   text-align: left;
 }
 
-body #content #wrapper .product-box .right-content .title, #root #content #wrapper .product-box .right-content .title, .App #content #wrapper .product-box .right-content .title {
+body #content #wrapper .product-box .product-box-wrapper .right-content .title, #root #content #wrapper .product-box .product-box-wrapper .right-content .title, .App #content #wrapper .product-box .product-box-wrapper .right-content .title {
   font-size: 1.1rem;
   font-weight: bold;
   white-space: nowrap;
   text-overflow: ellipsis;
   display: inline-block;
   overflow: hidden;
+  position: absolute;
+  width: calc( 100% - 40px);
 }
 
-body #content #wrapper .product-box .right-content .new-title-wrapper, #root #content #wrapper .product-box .right-content .new-title-wrapper, .App #content #wrapper .product-box .right-content .new-title-wrapper {
+body #content #wrapper .product-box .product-box-wrapper .right-content .footer, #root #content #wrapper .product-box .product-box-wrapper .right-content .footer, .App #content #wrapper .product-box .product-box-wrapper .right-content .footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 3fr 1fr;
+      grid-template-columns: 3fr 1fr;
+}
+
+body #content #wrapper .product-box .product-box-wrapper.new-wish, #root #content #wrapper .product-box .product-box-wrapper.new-wish, .App #content #wrapper .product-box .product-box-wrapper.new-wish {
+  height: auto;
+}
+
+body #content #wrapper .product-box .product-box-wrapper.new-wish .new-title-wrapper, #root #content #wrapper .product-box .product-box-wrapper.new-wish .new-title-wrapper, .App #content #wrapper .product-box .product-box-wrapper.new-wish .new-title-wrapper {
   width: 100%;
 }
 
-body #content #wrapper .product-box .right-content .new-title-wrapper .new-title, #root #content #wrapper .product-box .right-content .new-title-wrapper .new-title, .App #content #wrapper .product-box .right-content .new-title-wrapper .new-title {
+body #content #wrapper .product-box .product-box-wrapper.new-wish .new-title-wrapper .new-title, #root #content #wrapper .product-box .product-box-wrapper.new-wish .new-title-wrapper .new-title, .App #content #wrapper .product-box .product-box-wrapper.new-wish .new-title-wrapper .new-title {
   width: 100%;
   border: 0px;
   border-bottom: 1px solid gray;
   margin-bottom: 5px;
 }
 
-body #content #wrapper .product-box .right-content .new-url-wrapper, #root #content #wrapper .product-box .right-content .new-url-wrapper, .App #content #wrapper .product-box .right-content .new-url-wrapper {
+body #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper, #root #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper, .App #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper {
   width: 100%;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 7fr 3fr;
-      grid-template-columns: 7fr 3fr;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-body #content #wrapper .product-box .right-content .price, #root #content #wrapper .product-box .right-content .price, .App #content #wrapper .product-box .right-content .price {
+body #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner:first-child, #root #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner:first-child, .App #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner:first-child {
+  -ms-grid-columns: 30px 2fr 90px;
+      grid-template-columns: 30px 2fr 90px;
+}
+
+body #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner input, #root #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner input, .App #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner input {
+  border-bottom: 0px;
+}
+
+body #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner .btn, #root #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner .btn, .App #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner .btn {
+  height: 29px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+body #content #wrapper .product-box .product-box-wrapper.new-wish .price, #root #content #wrapper .product-box .product-box-wrapper.new-wish .price, .App #content #wrapper .product-box .product-box-wrapper.new-wish .price {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -295,11 +334,11 @@ body #content #wrapper .product-box .right-content .price, #root #content #wrapp
   padding-bottom: 15px;
 }
 
-body #content #wrapper .product-box .right-content .price a, #root #content #wrapper .product-box .right-content .price a, .App #content #wrapper .product-box .right-content .price a {
+body #content #wrapper .product-box .product-box-wrapper.new-wish .price a, #root #content #wrapper .product-box .product-box-wrapper.new-wish .price a, .App #content #wrapper .product-box .product-box-wrapper.new-wish .price a {
   color: white;
 }
 
-body #content #wrapper .product-box .right-content .footer, #root #content #wrapper .product-box .right-content .footer, .App #content #wrapper .product-box .right-content .footer {
+body #content #wrapper .product-box .product-box-wrapper.new-wish .footer, #root #content #wrapper .product-box .product-box-wrapper.new-wish .footer, .App #content #wrapper .product-box .product-box-wrapper.new-wish .footer {
   position: absolute;
   display: -ms-grid;
   display: grid;
@@ -311,7 +350,7 @@ body #content #wrapper .product-box .right-content .footer, #root #content #wrap
   width: calc(100% - 20px);
 }
 
-body #content #wrapper .product-box .right-content .footer .rightBtn, #root #content #wrapper .product-box .right-content .footer .rightBtn, .App #content #wrapper .product-box .right-content .footer .rightBtn {
+body #content #wrapper .product-box .product-box-wrapper.new-wish .footer .rightBtn, #root #content #wrapper .product-box .product-box-wrapper.new-wish .footer .rightBtn, .App #content #wrapper .product-box .product-box-wrapper.new-wish .footer .rightBtn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -349,5 +388,43 @@ body footer #poem #author, #root footer #poem #author, .App footer #poem #author
   color: gray;
   display: block;
   text-align: right;
+}
+
+#bottom-button-wrapper {
+  width: 100%;
+  position: absolute;
+  bottom: 5px;
+  left: 0px;
+  height: 50px;
+  background-color: green;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 90px;
+      grid-template-columns: 1fr 90px;
+}
+
+#bottom-button-wrapper .bottom-button {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#bottom-button-wrapper .bottom-button#new-wish-btn {
+  background-color: #089708;
+}
+
+#bottom-button-wrapper .bottom-button#edit-list-btn {
+  background-color: #d1881a;
+}
+
+#bottom-button-wrapper .bottom-button#close-list-btn {
+  background-color: #b12525;
 }
 /*# sourceMappingURL=main.css.map */
