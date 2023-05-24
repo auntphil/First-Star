@@ -12,7 +12,6 @@ body, #root, .App {
 
 body .boringLink, #root .boringLink, .App .boringLink {
   text-decoration: none;
-  text-underline: none;
   color: black;
 }
 
@@ -196,8 +195,8 @@ body #content #wrapper .product-box .product-box-wrapper .input-wrapper-inner, #
   height: 30px;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 30px 1fr;
-      grid-template-columns: 30px 1fr;
+  -ms-grid-columns: 30px 2fr 90px;
+      grid-template-columns: 30px 2fr 90px;
   padding: 0px;
   margin-bottom: 5px;
   border-bottom: 1px solid #0dcaf0;
@@ -269,6 +268,7 @@ body #content #wrapper .product-box .product-box-wrapper .right-content .title, 
 body #content #wrapper .product-box .product-box-wrapper .right-content .favIcon, #root #content #wrapper .product-box .product-box-wrapper .right-content .favIcon, .App #content #wrapper .product-box .product-box-wrapper .right-content .favIcon {
   background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 body #content #wrapper .product-box .product-box-wrapper .right-content .footer, #root #content #wrapper .product-box .product-box-wrapper .right-content .footer, .App #content #wrapper .product-box .product-box-wrapper .right-content .footer {
@@ -282,13 +282,11 @@ body #content #wrapper .product-box .product-box-wrapper .right-content .footer,
 }
 
 body #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper, #root #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper, .App #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 30px auto;
+      grid-template-columns: 30px auto;
+  grid-gap: 10px;
 }
 
 body #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper .favIcon, #root #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper .favIcon, .App #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper .favIcon {
@@ -320,11 +318,6 @@ body #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapp
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
-body #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner:first-child, #root #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner:first-child, .App #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner:first-child {
-  -ms-grid-columns: 30px 2fr 90px;
-      grid-template-columns: 30px 2fr 90px;
 }
 
 body #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner input, #root #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner input, .App #content #wrapper .product-box .product-box-wrapper.new-wish .new-url-wrapper .input-wrapper-inner input {

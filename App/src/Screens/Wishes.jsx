@@ -21,14 +21,12 @@ const Wishes = ({user}) => {
     //New Wish
     const [showNewWish, setShowNewWish] = useState(false)
     const [loadingNewItem, setLoadingNewItem] = useState(false)
-    const [wURL1, setWURL1] = useState("")
-    const [wURL2, setWURL2] = useState("")
-    const [wURL3, setWURL3] = useState("")
+    const [wishURLs, setWishURLs] = useState(["","",""])
     const [wTitle, setWTitle] = useState("")
     const [wImageURL, setwImageURL] = useState("")
-    const [icon, setIcon] = useState("")
+
+    const [wishIcons, setWishIcons] = useState(["","",""])
     const [iconLoading, setIconLoading] = useState(false)
-    
     
     useEffect(() => {
         const getList = async () => {
@@ -60,14 +58,14 @@ const Wishes = ({user}) => {
     
     const saveWish = async () => {
         const urls = []
-        if( wURL1.length !== 0 ){urls.push(wURL1)}
-        if( wURL2.length !== 0 ){urls.push(wURL2)}
-        if( wURL3.length !== 0 ){urls.push(wURL3)}
+        if( wishURLs[0].length !== 0 ){urls.push(wishURLs[0])}
+        if( wishURLs[1].length !== 0 ){urls.push(wishURLs[1])}
+        if( wishURLs[2].length !== 0 ){urls.push(wishURLs[2])}
         
         const icons = []
-        if( wURL1.length !== 0 ){icons.push(icon)}
-        if( wURL2.length !== 0 ){icons.push('')}
-        if( wURL3.length !== 0 ){icons.push('')}
+        if( wishURLs[0].length !== 0 ){icons.push(wishIcons[0])}
+        if( wishURLs[1].length !== 0 ){icons.push(wishIcons[1])}
+        if( wishURLs[2].length !== 0 ){icons.push(wishIcons[2])}
 
 
         const wish = {
@@ -101,21 +99,19 @@ const Wishes = ({user}) => {
 
     const handleCancelWish = () => {
         setShowNewWish(false)
-        setWURL1('')
-        setWURL2('')
-        setWURL3('')
+        setWishURLs(["","",""])
         setwImageURL('')
         setWTitle('')
-        setIcon('')
+        setWishIcons(["","",""])
     }
 
-    const checkFunctionStatus = async (id, getFunc, func, count = 0) => {
-        getFunc(id)
+    const checkFunctionStatus = async (param, getFunc, func, id, count = 0) => {
+        getFunc(param)
             .then( funcData => {
                 if( funcData.status === "completed" || funcData.status === "failed" ){
                     let data = JSON.parse(funcData.response)
                     if(data.success){
-                        func(data)
+                        func(data, id)
                     }else{
                         console.log("Failed to load item")
                         setErrorMsg("Failed to load item")
@@ -123,7 +119,7 @@ const Wishes = ({user}) => {
                 } else {    
                     count++
                     if(count < 20){
-                        setTimeout(() => checkFunctionStatus(id, getFunc, func, count), 2000);
+                        setTimeout(() => checkFunctionStatus(param, getFunc, func, id, count), 2000);
                     }else{
                         console.log("Failed to load item")
                         setErrorMsg("Failed to load item")
@@ -135,40 +131,50 @@ const Wishes = ({user}) => {
         }
         
         
-        const fetchWish = async () => {
+        const fetchWish = async (id) => {
             setLoadingNewItem(true)
             setError(false)
-            if( wURL1 === "" ) return
+            if( wishURLs[0] === "" ) return
             
-            fetchIcon()
-            createProductInfo(wURL1)
+            fetchIcon(id)
+            createProductInfo(wishURLs[0])
             .then( async response => {
-                setTimeout(() => checkFunctionStatus(response.$id, getProductInfo, updateWish), 2000);
+                setTimeout(() => checkFunctionStatus(response.$id, getProductInfo, updateWish, id), 2000);
             }, error => {
                 console.log(error)
         })
     }
+
+    const handleWishURLChange = (id, value) => {
+        if(value === ''){
+            const tempIcons = [...wishIcons]
+            tempIcons[id] = ''
+            setWishIcons(tempIcons)
+        }
+        const temp = [...wishURLs]
+        temp[id] = value
+        setWishURLs(temp)
+    }
     
-    const updateWish = (data) => {
+    const updateWish = (data, id) => {
+        const temp = [...wishURLs]
+        temp[id] = data.url
         setwImageURL(data.image)
         setWTitle(data.name)
-        setWURL1(data.url)
+        setWishURLs(temp)
         setLoadingNewItem(false)
     }
 
-    const fetchIcon = async () => {
+    const fetchIcon = async (id) => {
         setIconLoading(true)
         setError(false)
-        if( wURL1 === "" ) return
+        if( wishURLs[id] === "" ) return
 
-        createFavIcon(wURL1)
-            .then( async response => {
-                setTimeout(() => checkFunctionStatus(response.$id, getFavIcon, updateIcon), 2000)
-            })
-    }
+        let newURL = new URL(wishURLs[id])
 
-    const updateIcon = (data) => {
-        setIcon(data.icons[0].src)
+        const temp = [...wishIcons]
+        temp[id] = `${newURL.origin}/favicon.ico`
+        setWishIcons(temp)
         setIconLoading(false)
     }
 
@@ -218,25 +224,43 @@ const Wishes = ({user}) => {
                                 </div>
                                 <div className="new-url-wrapper">
                                     <div className="input-wrapper-inner">
-                                        <div className="favIcon" style={{backgroundImage: `url(${icon})`}}>
+                                        <div className="favIcon" style={{backgroundImage: `url(${wishIcons[0]})`}}>
                                         { iconLoading ?
                                             <LoadingMagnifyingGlass s={'29'} p={'0px'} />
                                             :
                                             ''
                                         }
                                         </div>
-                                        <input type="text" placeholder='1st Link' value={wURL1} onChange={(e) => setWURL1(e.target.value)} />
-                                        <button onClick={fetchWish} className="btn btn-info">
+                                        <input type="text" placeholder='1st Link' value={wishURLs[0]} onChange={(e) => handleWishURLChange(0,e.target.value)} />
+                                        <button onClick={() => {fetchWish(0)}} className="btn btn-info">
                                             <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: '#FFFFFF', fontSize: '0.75rem'}} />
                                         </button>
                                     </div>
                                     <div className="input-wrapper-inner">
-                                        <div className="favIcon"></div>
-                                        <input type="text" placeholder='2nd Link' value={wURL2} onChange={(e) => setWURL2(e.target.value)} />
+                                        <div className="favIcon" style={{backgroundImage: `url(${wishIcons[1]})`}}>
+                                            { iconLoading ?
+                                                <LoadingMagnifyingGlass s={'29'} p={'0px'} />
+                                                :
+                                                ''
+                                            }
+                                        </div>
+                                        <input type="text" placeholder='2nd Link' value={wishURLs[1]} onChange={(e) => handleWishURLChange(1,e.target.value)} />
+                                        <button onClick={() => {fetchIcon(1)}} className="btn btn-info">
+                                            <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: '#FFFFFF', fontSize: '0.75rem'}} />
+                                        </button>
                                     </div>
                                     <div className="input-wrapper-inner">
-                                        <div className="favIcon"></div>
-                                        <input type="text" placeholder='3rd Link' value={wURL3} onChange={(e) => setWURL3(e.target.value)} />
+                                        <div className="favIcon" style={{backgroundImage: `url(${wishIcons[2]})`}}>
+                                            { iconLoading ?
+                                                <LoadingMagnifyingGlass s={'29'} p={'0px'} />
+                                                :
+                                                ''
+                                            }
+                                        </div>
+                                        <input type="text" placeholder='3rd Link' value={wishURLs[2]} onChange={(e) => handleWishURLChange(2,e.target.value) } />
+                                        <button onClick={() => {fetchIcon(2)}} className="btn btn-info">
+                                            <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: '#FFFFFF', fontSize: '0.75rem'}} />
+                                        </button>
                                     </div>
                                 </div>
                                 <div className='footer'>
