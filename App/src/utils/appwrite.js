@@ -23,8 +23,15 @@ const deleteDocument = (databaseID, collectionID, documentID) => databases.delet
 //Functions
 const createProductInfo = (url) => functions.createExecution("645594ed49b51c758c6d", `{"url" : "${url}"}`, true)
 const getProductInfo = (id) => functions.getExecution("645594ed49b51c758c6d",`${id}`)
+const createFavIcon = (url) => functions.createExecution("64642d1eda084906568e",`{"url" : "${url}"}`, true)
+const getFavIcon = (id) => functions.getExecution("64642d1eda084906568e",`${id}`)
 
 
 
 
-export {account, client, createUser, loginUser, getCurrentUser, logoutUser, createDocument, listDocuments, getDocument, deleteDocument, createProductInfo, getProductInfo}
+export {account, client,
+    createUser, loginUser, getCurrentUser, logoutUser,
+    createDocument, listDocuments, getDocument, deleteDocument,
+    createProductInfo, getProductInfo,
+    createFavIcon, getFavIcon
+}

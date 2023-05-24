@@ -26,16 +26,20 @@ export const WishBox = ({wish, wishId, user, listEdit, handleDeleteWish}) => {
                 <div className="left-content" style={{backgroundImage: `url(${wish.image})`}} ></div>
                 <div className='right-content'>
                     <div className='title'>{wish.name}</div>
-                    <span className='footer'>
-                        <span className='footer-space'>
-                            {wish.url.map( url => (
-                                <a href={url} target="_blank" rel="noreferrer" className='boringLink' key={url}>Link</a>
-                            ))}
-                        </span>
-                        <span className='footer-space'>Priority</span>
-                    </span>
+                    <div className='footer'>
+                        <div className='footer-space'>
+                            <div className='icon-wrapper'>
+                                {wish.url.map( (url, index) => (
+                                    <a href={url} target="_blank" rel="noreferrer" className='boringLink' key={url}>
+                                        <div className='favIcon' style={{backgroundImage: `url(${ wish.urlIcons[index] })`}}></div>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                        <div className='footer-space'>Priority</div>
+                    </div>
                 </div>
-                <span className='remove-wish-wrapper'>
+                <div className='remove-wish-wrapper'>
                     {
                         loading ?
                             <LoadingThreeCircles s={'22'} p={'0px'} />
@@ -45,7 +49,7 @@ export const WishBox = ({wish, wishId, user, listEdit, handleDeleteWish}) => {
                             :
                             ''
                     }
-                </span>
+                </div>
             </div>
         </div>
     )

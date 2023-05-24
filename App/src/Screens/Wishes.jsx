@@ -3,7 +3,7 @@ import { LoadingMagnifyingGlass, LoadingThreeCircles } from "./Loading"
 import {WishBox} from './WishBox'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass, faPencil, faPlus, faSave, faX } from "@fortawesome/free-solid-svg-icons"
-import { createDocument, createProductInfo, deleteDocument, getDocument, getProductInfo, listDocuments } from "../utils/appwrite"
+import { createDocument, createFavIcon, createProductInfo, deleteDocument, getDocument, getFavIcon, getProductInfo, listDocuments } from "../utils/appwrite"
 import { Query } from "appwrite"
 
 const Wishes = ({user}) => {
@@ -26,6 +26,8 @@ const Wishes = ({user}) => {
     const [wURL3, setWURL3] = useState("")
     const [wTitle, setWTitle] = useState("")
     const [wImageURL, setwImageURL] = useState("")
+    const [icon, setIcon] = useState("")
+    const [iconLoading, setIconLoading] = useState(false)
     
     
     useEffect(() => {
@@ -61,11 +63,17 @@ const Wishes = ({user}) => {
         if( wURL1.length !== 0 ){urls.push(wURL1)}
         if( wURL2.length !== 0 ){urls.push(wURL2)}
         if( wURL3.length !== 0 ){urls.push(wURL3)}
+        
+        const icons = []
+        if( wURL1.length !== 0 ){icons.push(icon)}
+        if( wURL2.length !== 0 ){icons.push('')}
+        if( wURL3.length !== 0 ){icons.push('')}
 
 
         const wish = {
             "name":wTitle,
             "url": urls,
+            "urlIcons": icons,
             "image":wImageURL.length === 0 ? null : wImageURL,
             "wishLists":listId
         }
@@ -98,26 +106,24 @@ const Wishes = ({user}) => {
         setWURL3('')
         setwImageURL('')
         setWTitle('')
+        setIcon('')
     }
 
-    const checkFunctionStatus = async (id, count = 0) => {
-        getProductInfo(id)
+    const checkFunctionStatus = async (id, getFunc, func, count = 0) => {
+        getFunc(id)
             .then( funcData => {
                 if( funcData.status === "completed" || funcData.status === "failed" ){
                     let data = JSON.parse(funcData.response)
                     if(data.success){
-                        setwImageURL(data.image)
-                        setWTitle(data.name)
-                        setWURL1(data.url)
+                        func(data)
                     }else{
                         console.log("Failed to load item")
                         setErrorMsg("Failed to load item")
                     }
-                    setLoadingNewItem(false)
                 } else {    
                     count++
-                    if(count < 10){
-                        setTimeout(() => checkFunctionStatus(id, count), 2000);
+                    if(count < 20){
+                        setTimeout(() => checkFunctionStatus(id, getFunc, func, count), 2000);
                     }else{
                         console.log("Failed to load item")
                         setErrorMsg("Failed to load item")
@@ -126,19 +132,44 @@ const Wishes = ({user}) => {
             }, error => {
                 console.log(error)
             })
+        }
+        
+        
+        const fetchWish = async () => {
+            setLoadingNewItem(true)
+            setError(false)
+            if( wURL1 === "" ) return
+            
+            fetchIcon()
+            createProductInfo(wURL1)
+            .then( async response => {
+                setTimeout(() => checkFunctionStatus(response.$id, getProductInfo, updateWish), 2000);
+            }, error => {
+                console.log(error)
+        })
+    }
+    
+    const updateWish = (data) => {
+        setwImageURL(data.image)
+        setWTitle(data.name)
+        setWURL1(data.url)
+        setLoadingNewItem(false)
     }
 
-    const fetchWish = async () => {
-        setLoadingNewItem(true)
+    const fetchIcon = async () => {
+        setIconLoading(true)
         setError(false)
         if( wURL1 === "" ) return
 
-        createProductInfo(wURL1)
+        createFavIcon(wURL1)
             .then( async response => {
-                setTimeout(() => checkFunctionStatus(response.$id), 2000);
-            }, error => {
-                console.log(error)
+                setTimeout(() => checkFunctionStatus(response.$id, getFavIcon, updateIcon), 2000)
             })
+    }
+
+    const updateIcon = (data) => {
+        setIcon(data.icons[0].src)
+        setIconLoading(false)
     }
 
     if(loading)return <LoadingThreeCircles />
@@ -187,9 +218,9 @@ const Wishes = ({user}) => {
                                 </div>
                                 <div className="new-url-wrapper">
                                     <div className="input-wrapper-inner">
-                                        <div className="favIcon">
-                                        { loadingNewItem ?
-                                            <LoadingMagnifyingGlass s={'29px'} />
+                                        <div className="favIcon" style={{backgroundImage: `url(${icon})`}}>
+                                        { iconLoading ?
+                                            <LoadingMagnifyingGlass s={'29'} p={'0px'} />
                                             :
                                             ''
                                         }

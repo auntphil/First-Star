@@ -226,6 +226,13 @@ body #content #wrapper .product-box .product-box-wrapper .left-content, #root #c
   height: 100%;
   background-position: center;
   position: relative;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background-size: 100%;
+}
+
+body #content #wrapper .product-box .product-box-wrapper .left-content:hover, #root #content #wrapper .product-box .product-box-wrapper .left-content:hover, .App #content #wrapper .product-box .product-box-wrapper .left-content:hover {
+  background-size: 115%;
 }
 
 body #content #wrapper .product-box .product-box-wrapper .left-content .image-input-wrapper, #root #content #wrapper .product-box .product-box-wrapper .left-content .image-input-wrapper, .App #content #wrapper .product-box .product-box-wrapper .left-content .image-input-wrapper {
@@ -259,6 +266,11 @@ body #content #wrapper .product-box .product-box-wrapper .right-content .title, 
   width: calc( 100% - 40px);
 }
 
+body #content #wrapper .product-box .product-box-wrapper .right-content .favIcon, #root #content #wrapper .product-box .product-box-wrapper .right-content .favIcon, .App #content #wrapper .product-box .product-box-wrapper .right-content .favIcon {
+  background-size: contain;
+  background-position: center;
+}
+
 body #content #wrapper .product-box .product-box-wrapper .right-content .footer, #root #content #wrapper .product-box .product-box-wrapper .right-content .footer, .App #content #wrapper .product-box .product-box-wrapper .right-content .footer {
   position: absolute;
   bottom: 10px;
@@ -267,6 +279,21 @@ body #content #wrapper .product-box .product-box-wrapper .right-content .footer,
   display: grid;
   -ms-grid-columns: 3fr 1fr;
       grid-template-columns: 3fr 1fr;
+}
+
+body #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper, #root #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper, .App #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+body #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper .favIcon, #root #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper .favIcon, .App #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper .favIcon {
+  height: 30px;
+  width: 30px;
 }
 
 body #content #wrapper .product-box .product-box-wrapper.new-wish, #root #content #wrapper .product-box .product-box-wrapper.new-wish, .App #content #wrapper .product-box .product-box-wrapper.new-wish {

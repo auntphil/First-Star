@@ -24,3 +24,4 @@ yarn-error.log*
 .env
 App/node_modules/
 Functions/GetProductInfo/code.tar.gz
+Functions/GetFavIcon/code.tar.gz
