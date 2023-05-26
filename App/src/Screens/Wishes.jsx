@@ -182,12 +182,14 @@ const Wishes = ({user}) => {
 
     return(
         <div id="wrapper">
-            {
-                listEdit ?
-                    <h2><input type="text" value={listTitle} onChange={(e) => setListTitle(e.target.value)} /></h2>
-                :
-                    <h2>{listTitle}</h2>
-            }
+            <div>
+                {
+                    listEdit ?
+                        <h2><input type="text" value={listTitle} onChange={(e) => setListTitle(e.target.value)} /></h2>
+                    :
+                        <h2>{listTitle}</h2>
+                }
+            </div>
             <div id="product-wrapper">
                 { wishes.length === 0 ?
                     <div>No Wishes</div>

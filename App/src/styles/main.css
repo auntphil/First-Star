@@ -70,13 +70,8 @@ body .App-header #userHeader #header-btn-wrapper .btn:first-child, #root .App-he
 
 body #content, #root #content, .App #content {
   min-height: calc(100vh - 150px);
-  padding-bottom: 55px;
-  padding-top: 50px;
-  max-width: 750px;
-  margin: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  padding: 55px 15px 50px 15px;
+  max-width: 100%;
   position: relative;
 }
 
@@ -84,6 +79,22 @@ body #content #wrapper, #root #content #wrapper, .App #content #wrapper {
   text-align: center;
   margin: auto;
   width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 50px 1fr;
+      grid-template-rows: 50px 1fr;
+}
+
+body #content #wrapper #product-wrapper, #root #content #wrapper #product-wrapper, .App #content #wrapper #product-wrapper {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 25px;
+  -ms-grid-columns: (300px)[auto-fit];
+      grid-template-columns: repeat(auto-fit, 300px);
+  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 body #content #wrapper .modal-wrapper, #root #content #wrapper .modal-wrapper, .App #content #wrapper .modal-wrapper {
@@ -158,6 +169,7 @@ body #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper, #
   bottom: 5px;
   right: 5px;
   cursor: pointer;
+  background-color: white;
 }
 
 body #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper .remove-wish-btn, #root #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper .remove-wish-btn, .App #content #wrapper .product-box .product-box-wrapper .remove-wish-wrapper .remove-wish-btn {
@@ -252,17 +264,27 @@ body #content #wrapper .product-box .product-box-wrapper .right-content, #root #
   padding: 10px;
   position: relative;
   text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 body #content #wrapper .product-box .product-box-wrapper .right-content .title, #root #content #wrapper .product-box .product-box-wrapper .right-content .title, .App #content #wrapper .product-box .product-box-wrapper .right-content .title {
-  font-size: 1.1rem;
-  font-weight: bold;
-  white-space: nowrap;
+  font-size: 1rem;
   text-overflow: ellipsis;
-  display: inline-block;
   overflow: hidden;
-  position: absolute;
-  width: calc( 100% - 40px);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  line-height: 1.1rem;
 }
 
 body #content #wrapper .product-box .product-box-wrapper .right-content .favIcon, #root #content #wrapper .product-box .product-box-wrapper .right-content .favIcon, .App #content #wrapper .product-box .product-box-wrapper .right-content .favIcon {
@@ -272,24 +294,16 @@ body #content #wrapper .product-box .product-box-wrapper .right-content .favIcon
 }
 
 body #content #wrapper .product-box .product-box-wrapper .right-content .footer, #root #content #wrapper .product-box .product-box-wrapper .right-content .footer, .App #content #wrapper .product-box .product-box-wrapper .right-content .footer {
-  position: absolute;
   bottom: 10px;
   width: 100%;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 3fr 1fr;
-      grid-template-columns: 3fr 1fr;
+  -ms-grid-columns: (30px)[3] 1fr;
+      grid-template-columns: repeat(3, 30px) 1fr;
+  grid-gap: 5px;
 }
 
-body #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper, #root #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper, .App #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 30px auto;
-      grid-template-columns: 30px auto;
-  grid-gap: 10px;
-}
-
-body #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper .favIcon, #root #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper .favIcon, .App #content #wrapper .product-box .product-box-wrapper .right-content .footer .icon-wrapper .favIcon {
+body #content #wrapper .product-box .product-box-wrapper .right-content .footer .favIcon, #root #content #wrapper .product-box .product-box-wrapper .right-content .footer .favIcon, .App #content #wrapper .product-box .product-box-wrapper .right-content .footer .favIcon {
   height: 30px;
   width: 30px;
 }

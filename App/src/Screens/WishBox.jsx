@@ -27,15 +27,15 @@ export const WishBox = ({wish, wishId, user, listEdit, handleDeleteWish}) => {
                 <div className='right-content'>
                     <div className='title'>{wish.name}</div>
                     <div className='footer'>
-                        <div className='footer-space'>
-                            <div className='icon-wrapper'>
-                                {wish.url.map( (url, index) => (
-                                    <a href={url} target="_blank" rel="noreferrer" className='boringLink' key={url}>
-                                        <div className='favIcon' style={{backgroundImage: `url(${ wish.urlIcons[index] })`}}></div>
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
+                        <a href={wish.url[0]} target="_blank" rel="noreferrer" className='boringLink' key={wish.url[0]}>
+                            <div className='favIcon' style={{backgroundImage: `url(${ wish.urlIcons[0] })`}}></div>
+                        </a>
+                        <a href={wish.url[1]} target="_blank" rel="noreferrer" className='boringLink' key={wish.url[1]}>
+                            <div className='favIcon' style={{backgroundImage: `url(${ wish.urlIcons[1] })`}}></div>
+                        </a>
+                        <a href={wish.url[2]} target="_blank" rel="noreferrer" className='boringLink' key={wish.url[2]}>
+                            <div className='favIcon' style={{backgroundImage: `url(${ wish.urlIcons[2] })`}}></div>
+                        </a>
                         <div className='footer-space'>Priority</div>
                     </div>
                 </div>

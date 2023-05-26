@@ -39,16 +39,21 @@ body, #root, .App
                         margin-right: 10px
     #content
         min-height: calc(100vh - 150px)
-        padding-bottom: 55px
-        padding-top: 50px
-        max-width: 750px
-        margin: auto
-        display: flex
+        padding: 55px 15px 50px 15px
+        max-width: 100%
         position: relative
         #wrapper
             text-align: center
             margin: auto
             width: 100%
+            display: grid
+            grid-template-rows: 50px 1fr
+            #product-wrapper
+                display: grid
+                grid-gap: 25px
+                grid-template-columns: repeat(auto-fit, 300px)
+                height: 100%
+                justify-content: center
             .modal-wrapper
                 position: fixed
                 width: 100%
@@ -91,6 +96,7 @@ body, #root, .App
                         bottom: 5px
                         right: 5px
                         cursor: pointer
+                        background-color: white
                         .remove-wish-btn
                             display: flex
                             justify-content: center
@@ -144,32 +150,31 @@ body, #root, .App
                         padding: 10px
                         position: relative
                         text-align: left
+                        display: flex
+                        flex-direction: column
+                        justify-content: space-between
                         .title
-                            font-size: 1.1rem
-                            font-weight: bold
-                            white-space: nowrap
+                            font-size: 1rem
                             text-overflow: ellipsis
-                            display: inline-block
                             overflow: hidden
-                            position: absolute
-                            width: calc( 100% - 40px )
+                            display: -webkit-box
+                            -webkit-box-orient: vertical
+                            -webkit-line-clamp: 2
+                            line-clamp: 2
+                            line-height: 1.1rem
                         .favIcon
                             background-size: contain
                             background-position: center
                             background-repeat: no-repeat
                         .footer
-                            position: absolute
                             bottom: 10px
                             width: 100%
                             display: grid
-                            grid-template-columns: 3fr 1fr
-                            .icon-wrapper
-                                display: grid
-                                grid-template-columns: 30px auto
-                                grid-gap: 10px
-                                .favIcon
-                                    height: 30px
-                                    width: 30px
+                            grid-template-columns: repeat(3, 30px) 1fr
+                            grid-gap: 5px
+                            .favIcon
+                                height: 30px
+                                width: 30px
                     &.new-wish
                         height: auto
                         .new-title-wrapper
