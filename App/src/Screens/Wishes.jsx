@@ -3,7 +3,7 @@ import { LoadingMagnifyingGlass, LoadingThreeCircles } from "./Loading"
 import {WishBox} from './WishBox'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass, faPencil, faPlus, faSave, faX } from "@fortawesome/free-solid-svg-icons"
-import { createDocument, createFavIcon, createProductInfo, deleteDocument, getDocument, getFavIcon, getProductInfo, listDocuments } from "../utils/appwrite"
+import { createDocument, createProductInfo, deleteDocument, getDocument, getProductInfo, listDocuments } from "../utils/appwrite"
 import { Query } from "appwrite"
 
 const Wishes = ({user}) => {
@@ -146,11 +146,7 @@ const Wishes = ({user}) => {
     }
 
     const handleWishURLChange = (id, value) => {
-        if(value === ''){
-            const tempIcons = [...wishIcons]
-            tempIcons[id] = ''
-            setWishIcons(tempIcons)
-        }
+        fetchIcon(id, value)
         const temp = [...wishURLs]
         temp[id] = value
         setWishURLs(temp)
@@ -165,16 +161,21 @@ const Wishes = ({user}) => {
         setLoadingNewItem(false)
     }
 
-    const fetchIcon = async (id) => {
+    const fetchIcon = (id, value = '') => {
+        if( value === "" ) return
+        if( value === ''){
+            value = wishURLs[id]
+        }
         setIconLoading(true)
         setError(false)
-        if( wishURLs[id] === "" ) return
 
-        let newURL = new URL(wishURLs[id])
+        try{
+            let newURL = new URL(value)
+            const temp = [...wishIcons]
+            temp[id] = `${newURL.origin}/favicon.ico`
+            setWishIcons(temp)
+        }catch(error) {}
 
-        const temp = [...wishIcons]
-        temp[id] = `${newURL.origin}/favicon.ico`
-        setWishIcons(temp)
         setIconLoading(false)
     }
 
@@ -203,80 +204,80 @@ const Wishes = ({user}) => {
                         handleDeleteWish={handleDeleteWish}
                         />)
                 }
-                { showNewWish ?
-                    <div className="product-box">
-                        <h2>Make a Wish</h2>
-                        <div className="product-box-wrapper new-wish">
-                            <div className='left-content' style={{backgroundImage: `url(${wImageURL})`}} >
-                                { loadingNewItem ?
-                                    <LoadingMagnifyingGlass s={'70px'} />
-                                    :
-                                    ''
-                                }
-                                <div className="image-input-wrapper">
+            </div>
+            { showNewWish ?
+                <div className="product-box">
+                    <h2>Make a Wish</h2>
+                    <div className="product-box-wrapper new-wish">
+                        <div className='left-content' style={{backgroundImage: `url(${wImageURL})`}} >
+                            { loadingNewItem ?
+                                <LoadingMagnifyingGlass s={'70px'} />
+                                :
+                                ''
+                            }
+                            <div className="image-input-wrapper">
 
-                                    <div className="input-wrapper-inner single">
-                                        <input type="text" placeholder='Image Url' value={wImageURL} onChange={(e) => setwImageURL(e.target.value)} className="new-image-url" />
-                                    </div>
-                                </div>  
-                            </div>
-                            <div className="right-content">
                                 <div className="input-wrapper-inner single">
-                                    <input type="text" placeholder='Title' className='title new-title ' value={wTitle} onChange={(e) => {setWTitle(e.target.value)}} />
+                                    <input type="text" placeholder='Image Url' value={wImageURL} onChange={(e) => setwImageURL(e.target.value)} className="new-image-url" />
                                 </div>
-                                <div className="new-url-wrapper">
-                                    <div className="input-wrapper-inner">
-                                        <div className="favIcon" style={{backgroundImage: `url(${wishIcons[0]})`}}>
+                            </div>  
+                        </div>
+                        <div className="right-content">
+                            <div className="input-wrapper-inner single">
+                                <input type="text" placeholder='Title' className='title new-title ' value={wTitle} onChange={(e) => {setWTitle(e.target.value)}} />
+                            </div>
+                            <div className="new-url-wrapper">
+                                <div className="input-wrapper-inner">
+                                    <div className="favIcon" style={{backgroundImage: `url(${wishIcons[0]})`}}>
+                                    { iconLoading ?
+                                        <LoadingMagnifyingGlass s={'29'} p={'0px'} />
+                                        :
+                                        ''
+                                    }
+                                    </div>
+                                    <input type="text" placeholder='1st Link' value={wishURLs[0]} onChange={(e) => handleWishURLChange(0,e.target.value)} />
+                                    <button onClick={() => {fetchWish(0)}} className="btn btn-info">
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: '#FFFFFF', fontSize: '0.75rem'}} />
+                                    </button>
+                                </div>
+                                <div className="input-wrapper-inner">
+                                    <div className="favIcon" style={{backgroundImage: `url(${wishIcons[1]})`}}>
                                         { iconLoading ?
                                             <LoadingMagnifyingGlass s={'29'} p={'0px'} />
                                             :
                                             ''
                                         }
-                                        </div>
-                                        <input type="text" placeholder='1st Link' value={wishURLs[0]} onChange={(e) => handleWishURLChange(0,e.target.value)} />
-                                        <button onClick={() => {fetchWish(0)}} className="btn btn-info">
-                                            <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: '#FFFFFF', fontSize: '0.75rem'}} />
-                                        </button>
                                     </div>
-                                    <div className="input-wrapper-inner">
-                                        <div className="favIcon" style={{backgroundImage: `url(${wishIcons[1]})`}}>
-                                            { iconLoading ?
-                                                <LoadingMagnifyingGlass s={'29'} p={'0px'} />
-                                                :
-                                                ''
-                                            }
-                                        </div>
-                                        <input type="text" placeholder='2nd Link' value={wishURLs[1]} onChange={(e) => handleWishURLChange(1,e.target.value)} />
-                                        <button onClick={() => {fetchIcon(1)}} className="btn btn-info">
-                                            <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: '#FFFFFF', fontSize: '0.75rem'}} />
-                                        </button>
-                                    </div>
-                                    <div className="input-wrapper-inner">
-                                        <div className="favIcon" style={{backgroundImage: `url(${wishIcons[2]})`}}>
-                                            { iconLoading ?
-                                                <LoadingMagnifyingGlass s={'29'} p={'0px'} />
-                                                :
-                                                ''
-                                            }
-                                        </div>
-                                        <input type="text" placeholder='3rd Link' value={wishURLs[2]} onChange={(e) => handleWishURLChange(2,e.target.value) } />
-                                        <button onClick={() => {fetchIcon(2)}} className="btn btn-info">
-                                            <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: '#FFFFFF', fontSize: '0.75rem'}} />
-                                        </button>
-                                    </div>
+                                    <input type="text" placeholder='2nd Link' value={wishURLs[1]} onChange={(e) => handleWishURLChange(1,e.target.value)} />
+                                    <button onClick={() => {fetchIcon(1)}} className="btn btn-info">
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: '#FFFFFF', fontSize: '0.75rem'}} />
+                                    </button>
                                 </div>
-                                <div className='footer'>
-                                    <span>{ error ? errorMsg : ''}</span>
-                                    <span></span>
-                                    <span className="rightBtn"></span>
+                                <div className="input-wrapper-inner">
+                                    <div className="favIcon" style={{backgroundImage: `url(${wishIcons[2]})`}}>
+                                        { iconLoading ?
+                                            <LoadingMagnifyingGlass s={'29'} p={'0px'} />
+                                            :
+                                            ''
+                                        }
+                                    </div>
+                                    <input type="text" placeholder='3rd Link' value={wishURLs[2]} onChange={(e) => handleWishURLChange(2,e.target.value) } />
+                                    <button onClick={() => {fetchIcon(2)}} className="btn btn-info">
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: '#FFFFFF', fontSize: '0.75rem'}} />
+                                    </button>
                                 </div>
+                            </div>
+                            <div className='footer'>
+                                <span>{ error ? errorMsg : ''}</span>
+                                <span></span>
+                                <span className="rightBtn"></span>
                             </div>
                         </div>
                     </div>
-                :
-                ''
-                }
-            </div>
+                </div>
+            :
+            ''
+            }
 
             <div id="wish-floating-btn">
                 {
